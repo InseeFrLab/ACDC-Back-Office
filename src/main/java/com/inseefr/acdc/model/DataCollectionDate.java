@@ -6,18 +6,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "intl_text")
-public class IntlText {
+public class DataCollectionDate {
     @Id
     @GeneratedValue(generator = "UUID", strategy = GenerationType.AUTO)
     @SequenceGenerator(name = "UUID", sequenceName = "UUID", allocationSize = 1)
     private Long id;
-    private String lang;
-    private String text;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
 }
