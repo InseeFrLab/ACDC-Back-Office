@@ -33,10 +33,10 @@ public class DataCollection {
     private LocalDateTime versionDate;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
-    List<IntlText> label;
+    private List<Map<String,String>> label;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
-    private List<IntlText> description;
+    private List<Map<String,String>> description;
     @OneToMany
     private List<CollectionEvent> collectionEvents;
 
@@ -44,7 +44,7 @@ public class DataCollection {
     @Column(columnDefinition = "jsonb")
     private List<UserAttributePair> userAttributePair;
 
-    public DataCollection(String agency, int version, List<IntlText>  label, List<IntlText> description) {
+    public DataCollection(String agency, int version, List<Map<String,String>>  label, List<Map<String,String>> description) {
         this.agency = agency;
         this.version = version;
         this.label = label;

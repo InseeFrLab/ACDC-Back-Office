@@ -14,7 +14,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserAttributePairValue implements Serializable {
-    private List<IntlText> label;
+    private List<Map<String,String>> label;
     private List<Map<String,String>> collectionEventReference;
 
     @Override

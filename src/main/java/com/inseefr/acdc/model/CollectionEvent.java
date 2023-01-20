@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Type;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Getter
@@ -27,7 +28,7 @@ public class CollectionEvent {
     private int version;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
-    private List<IntlText> label;
+    private List<Map<String,String>> label;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     private DataCollectionDate dataCollectionDate;
@@ -36,6 +37,17 @@ public class CollectionEvent {
     @OneToMany(cascade = CascadeType.ALL)
     private List<InstrumentReference> instrumentReference;
 
+    @Type(JsonType.class)
+    @Column(columnDefinition = "jsonb")
+    private List<CollectionUserAttributePair> userAttributePair;
 
+    public CollectionEvent(String agency, int version, List<Map<String, String>> label, DataCollectionDate dataCollectionDate, List<ModeOfCollection> modeOfCollection, List<InstrumentReference> instrumentReference) {
+        this.agency = agency;
+        this.version = version;
+        this.label = label;
+        this.dataCollectionDate = dataCollectionDate;
+        this.modeOfCollection = modeOfCollection;
+        this.instrumentReference = instrumentReference;
+    }
 }
 
