@@ -6,19 +6,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class DataCollectionDate {
-    @Id
-    @GeneratedValue(generator = "UUID", strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "UUID", sequenceName = "UUID", allocationSize = 1)
-    private Long id;
+public class DataCollectionDate implements Serializable {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
+    @Override
+    public String toString() {
+        return "DataCollectionDate{" +
+                "startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
 }

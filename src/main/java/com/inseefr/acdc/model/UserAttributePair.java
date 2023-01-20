@@ -7,22 +7,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class IntlText implements Serializable {
-
-    private String lang;
-    private String text;
+public class UserAttributePair implements Serializable {
+    private String attributeKey;
+    private List<UserAttributePairValue> attributeValue;
 
     @Override
     public String toString() {
-        return "IntlText{" +
-                "lang='" + lang + '\'' +
-                ", text='" + text + '\'' +
+        return "UserAttributePair{" +
+                "attributeKey='" + attributeKey + '\'' +
+                ", attributeValue=" + attributeValue.toString() +
                 '}';
     }
 
@@ -30,12 +30,12 @@ public class IntlText implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        IntlText intlText = (IntlText) o;
-        return Objects.equals(lang, intlText.lang) && Objects.equals(text, intlText.text);
+        UserAttributePair that = (UserAttributePair) o;
+        return Objects.equals(attributeKey, that.attributeKey) && Objects.equals(attributeValue, that.attributeValue);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lang, text);
+        return Objects.hash(attributeKey, attributeValue);
     }
 }

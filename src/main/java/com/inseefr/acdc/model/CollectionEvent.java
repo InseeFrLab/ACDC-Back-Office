@@ -1,15 +1,17 @@
 package com.inseefr.acdc.model;
 
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.Type;
 
 import java.util.List;
+import java.util.UUID;
 
-@Slf4j
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,17 +20,20 @@ import java.util.List;
 @Table(name = "collection_event")
 public class CollectionEvent {
     @Id
-    @Column(name = "id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", columnDefinition = "VARCHAR(255)")
+    private UUID id;
     private String agency;
     private int version;
-    @OneToOne
-    private IntlText label;
-    @OneToOne
+    @Type(JsonType.class)
+    @Column(columnDefinition = "jsonb")
+    private List<IntlText> label;
+    @Type(JsonType.class)
+    @Column(columnDefinition = "jsonb")
     private DataCollectionDate dataCollectionDate;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ModeOfCollection> modeOfCollection;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<InstrumentReference> instrumentReference;
 
 
