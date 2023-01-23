@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/api/collection-events")
 @Slf4j
 public class CollectionEventController {
     @Autowired

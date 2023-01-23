@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.List;
 import java.util.Map;
@@ -21,8 +23,9 @@ import java.util.UUID;
 @Table(name = "collection_event")
 public class CollectionEvent {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", columnDefinition = "VARCHAR(255)")
+    @GeneratedValue
+    @UuidGenerator
+    @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
     private String agency;
     private int version;
@@ -48,6 +51,12 @@ public class CollectionEvent {
         this.dataCollectionDate = dataCollectionDate;
         this.modeOfCollection = modeOfCollection;
         this.instrumentReference = instrumentReference;
+    }
+
+    public CollectionEvent(String agency, int version) {
+
+        this.agency = agency;
+        this.version = version;
     }
 }
 
