@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acdc-back-office
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: acdc-back-office
+  template:
+    metadata:
+      labels:
+        app: acdc-back-office
+    spec:
+      containers:
+        - name: acdc-back-office
+          image: mailinenguyen/acdc-back-office:latest
+          imagePullPolicy: Always
+          env:
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: acdc-database-postgresql
+                  key: postgres-password
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://acdc-database-postgresql/
+
