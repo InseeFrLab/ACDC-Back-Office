@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -21,7 +19,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "collection_event")
-public class CollectionEvent {
+public class CollectionEventObject {
     @Id
     @GeneratedValue
     @UuidGenerator
@@ -44,7 +42,7 @@ public class CollectionEvent {
     @Column(columnDefinition = "jsonb")
     private List<CollectionUserAttributePair> userAttributePair;
 
-    public CollectionEvent(String agency, int version, List<Map<String, String>> label, DataCollectionDate dataCollectionDate, List<ModeOfCollection> modeOfCollection, List<InstrumentReference> instrumentReference) {
+    public CollectionEventObject(String agency, int version, List<Map<String, String>> label, DataCollectionDate dataCollectionDate, List<ModeOfCollection> modeOfCollection, List<InstrumentReference> instrumentReference) {
         this.agency = agency;
         this.version = version;
         this.label = label;
@@ -53,7 +51,7 @@ public class CollectionEvent {
         this.instrumentReference = instrumentReference;
     }
 
-    public CollectionEvent(String agency, int version) {
+    public CollectionEventObject(String agency, int version) {
 
         this.agency = agency;
         this.version = version;

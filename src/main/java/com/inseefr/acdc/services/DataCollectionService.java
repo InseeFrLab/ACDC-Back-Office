@@ -1,21 +1,18 @@
 package com.inseefr.acdc.services;
 
-
-import com.inseefr.acdc.model.DataCollection;
+import com.inseefr.acdc.domain.DataCollection;
 import com.inseefr.acdc.repository.DataCollectionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 @Slf4j
 public class DataCollectionService {
-
     @Autowired
-    private DataCollectionRepository dataCollectionRepository;
+    DataCollectionRepository dataCollectionRepository;
 
     public List<DataCollection> getAllDataCollection() {
         return dataCollectionRepository.findAll();
@@ -26,9 +23,6 @@ public class DataCollectionService {
     }
 
     public DataCollection saveDataCollection(DataCollection dataCollection) {
-        LocalDateTime lt
-                = LocalDateTime.now();
-        dataCollection.setVersionDate(lt);
         return dataCollectionRepository.save(dataCollection);
     }
 
@@ -41,9 +35,7 @@ public class DataCollectionService {
     }
 
     public DataCollection updateDataCollection(DataCollection dataCollection) {
-        LocalDateTime lt
-                = LocalDateTime.now();
-        dataCollection.setVersionDate(lt);
+
         return dataCollectionRepository.saveAndFlush(dataCollection);
     }
 }

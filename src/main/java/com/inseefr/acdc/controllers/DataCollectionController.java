@@ -1,8 +1,9 @@
 package com.inseefr.acdc.controllers;
 
-import com.inseefr.acdc.model.DataCollection;
+import com.inseefr.acdc.domain.DataCollection;
 import com.inseefr.acdc.services.DataCollectionService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/data-collections")
+@Tag(name="Campagnes (Data Collection) Controller")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Slf4j
 public class DataCollectionController {
@@ -29,11 +31,11 @@ public class DataCollectionController {
     @GetMapping(value= "/{id}", produces = "application/json")
     public ResponseEntity<DataCollection> getDataCollectionById(@PathVariable String id) {
         log.info("Get data collection by id: " + id);
-        DataCollection dataCollection = dataCollectionService.getDataCollectionById(id);
-        if (dataCollection == null) {
+        DataCollection dataCollectionObject = dataCollectionService.getDataCollectionById(id);
+        if (dataCollectionObject == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(dataCollection);
+        return ResponseEntity.ok(dataCollectionObject);
     }
     @Operation(summary = "Save a new data collection")
     @PostMapping(consumes = "application/json", produces = "application/json")
