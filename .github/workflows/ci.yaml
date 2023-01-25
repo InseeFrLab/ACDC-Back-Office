@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [main]
+    branches: [develop]
   workflow_dispatch:
 
 jobs:
@@ -26,3 +26,4 @@ jobs:
           name: inseefrlab/acdc-back-office
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+          tags: "develop"
