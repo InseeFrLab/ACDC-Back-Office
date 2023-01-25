@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: acdc-back-office
-          image: mailinenguyen/acdc-back-office:latest
+          image: inseefrlab/acdc-back-office:latest
           imagePullPolicy: Always
           env:
             - name: SPRING_DATASOURCE_PASSWORD

@@ -1,0 +1,165 @@
+{
+    "id": "39e00da9-c1bc-4019-9672-0dbfa0d0c73a",
+    "agency": "fr.insee",
+    "version": 1,
+    "versionDate": "2022-05-12T00:00:00Z",
+    "label": {
+        "fr-FR": "Collecte de données pour l'enquête logement 2023",
+        "en-IE": "Data collection for household survey 2023"
+    },
+    "description": {
+        "fr-FR": "Collecte de données pour l'enquête logement 2023. La collecte de données est découpée en considérant les séquences de questionnaire, le mode de collecte et type communication.",
+        "en-IE": "Data collection for household survey 2023. Data collection is splitted considering sequences of questionnaire, collection mode and type of communication."
+    },
+    "userAttributePair": [
+        {
+            "attributeKey": "extension:CollectionEventGroup",
+            "attributeValue": [
+                {
+                    "label": {
+                        "fr-FR": "Groupe de lots numéro 1",
+                        "en-IE": "Batch group number 1"
+                    },
+                    "collectionEventReference": [
+                        {"id": "833e9208-6b6a-46d3-b8ad-ee5525c8fa4e"},
+                        {"id": "833e9208-6b6a-46d3-b8ad-ee5525c8fa4f"}
+                    ]
+                },
+                {
+                    "label": {
+                        "fr-FR": "Groupe de lots numéro 2",
+                        "en-IE": "Batch group number 2"
+                    },
+                    "collectionEventReference": [
+                        {"id": "833e9208-6b6a-46d3-b8ad-ee5525c8fa4f"},
+                        {"id": "833e9208-6b6a-46d3-b8ad-ee5525c8fa4g"}
+                    ]
+                }
+            ]
+        }
+    ],
+    "collectionEvents": [
+        {
+            "id": "833e9208-6b6a-46d3-b8ad-ee5525c8fa4e",
+            "agency": "fr.insee",
+            "version": 1,
+            "label": {
+                "fr-FR": "Lot pour les répondants CAWI de la séquence 1",
+                "en-IE": "Batch for CAWI respondents to sequence 1"
+            },
+            "description": {
+                "fr-FR": "Description du lot 1",
+                "en-IE": "Description for batch 1"
+            },
+            "dataCollectionDate": {
+                "startDate": "2022-05-12T00:00:00Z",
+                "endDate": "2022-05-26T00:00:00Z"
+            },
+            "modeOfCollection": [
+                {
+                    "id": "28a64fd8-722e-4a76-bb53-894700d5e77f",
+                    "agency": "fr.insee",
+                    "version": 1,
+                    "type": "CAPI"
+                },
+                {
+                    "id": "03b20606-3553-4f21-97cb-f938dc419d55",
+                    "agency": "fr.insee",
+                    "version": 1,
+                    "type": "CAWI"
+                }
+            ],
+            "instrumentReference": [
+                {
+                    "id": "493f8b38-1198-4e45-99d2-531ac8a48a4i",
+                    "agency": "fr.insee",
+                    "version": 1,
+                    "typeOfObject": "Instrument"
+                }
+            ],
+            "userAttributePair": [
+                {
+                    "attributeKey": "extension:CollectionCommunicationSteps",
+                    "attributeValue": [
+                        {
+                            "id": "uid1",
+                            "type": "opening",
+                            "media": "email",
+                            "paperQuestionnaire": false
+                        },
+                        {
+                            "id": "uid2",
+                            "type": "remind",
+                            "media": "mail",
+                            "paperQuestionnaire": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "833e9208-6b6a-46d3-b8ad-ee5525c8fa4f",
+            "agency": "fr.insee",
+            "version": 1,
+            "label": {
+                "fr-FR": "Lot pour les répondants CAWI de la séquence 1",
+                "en-IE": "Batch for CAWI respondents to sequence 1"
+            },
+            "dataCollectionDate": {
+                "startDate": "2022-05-12T00:00:00Z",
+                "endDate": "2022-05-26T00:00:00Z"
+            },
+            "modeOfCollection": [
+                {
+                    "id": "28a64fd8-722e-4a76-bb53-894700d5e77f",
+                    "agency": "fr.insee",
+                    "version": 1,
+                    "type": "CAPI"
+                },
+                {
+                    "id": "03b20606-3553-4f21-97cb-f938dc419d55",
+                    "agency": "fr.insee",
+                    "version": 1,
+                    "type": "CAWI"
+                }
+            ],
+            "instrumentReference": [
+                {
+                    "id": "493f8b38-1198-4e45-99d2-531ac8a48a48",
+                    "agency": "fr.insee",
+                    "version": 1,
+                    "typeOfObject": "Instrument"
+                }
+            ]
+        },
+        {
+            "id": "833e9208-6b6a-46d3-b8ad-ee5525c8fa4g",
+            "agency": "fr.insee",
+            "version": 1,
+            "label": {
+                "fr-FR": "Lot pour les répondants CAWI de la séquence 1",
+                "en-IE": "Batch for CAWI respondents to sequence 1"
+            },
+            "dataCollectionDate": {
+                "startDate": "2022-05-25T00:00:00",
+                "endDate": "2022-05-30T00:00:00"
+            },
+            "modeOfCollection": [
+                {
+                    "id": "28a64fd8-722e-4a76-bb53-894700d5e77g",
+                    "agency": "fr.insee",
+                    "version": 1,
+                    "type": "CATI"
+                }
+            ],
+            "instrumentReference": [
+                {
+                    "id": "493f8b38-1198-4e45-99d2-531ac8a48a49",
+                    "agency": "fr.insee",
+                    "version": 1,
+                    "typeOfObject": "Instrument"
+                }
+            ]
+        }
+    ]
+}
