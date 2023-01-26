@@ -7,6 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+import java.util.Map;
 
 @Getter
 @Setter
@@ -17,6 +21,6 @@ import lombok.Setter;
 public class DataCollection {
     @Id
     private String id;
-
-    private String json;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Map<String, Object> json;
 }
