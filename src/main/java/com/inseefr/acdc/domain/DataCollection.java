@@ -23,6 +23,6 @@ public class DataCollection {
     @Id
     private String id;
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "json", length = 4096)
+    @Column(name = "json", length = 4096, columnDefinition = "text")
     private Map<String, Object> json;
 }
