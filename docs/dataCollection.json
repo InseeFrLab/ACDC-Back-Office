@@ -43,6 +43,10 @@
             "id": "833e9208-6b6a-46d3-b8ad-ee5525c8fa4e",
             "agency": "fr.insee",
             "version": 1,
+            "collectionEventName": {
+                "fr-FR": "Lot 1",
+                "en-IE": "Batch 1"
+            },
             "label": {
                 "fr-FR": "Lot pour les répondants CAWI de la séquence 1",
                 "en-IE": "Batch for CAWI respondents to sequence 1"
@@ -91,6 +95,10 @@
             "id": "833e9208-6b6a-46d3-b8ad-ee5525c8fa4f",
             "agency": "fr.insee",
             "version": 1,
+            "collectionEventName": {
+                "fr-FR": "Lot 2",
+                "en-IE": "Batch 2"
+            },
             "label": {
                 "fr-FR": "Lot pour les répondants CAWI de la séquence 1",
                 "en-IE": "Batch for CAWI respondents to sequence 1"
@@ -116,6 +124,10 @@
             "id": "833e9208-6b6a-46d3-b8ad-ee5525c8fa4g",
             "agency": "fr.insee",
             "version": 1,
+            "collectionEventName": {
+                "fr-FR": "Lot 3",
+                "en-IE": "Batch 3"
+            },
             "label": {
                 "fr-FR": "Lot pour les répondants CAWI de la séquence 1",
                 "en-IE": "Batch for CAWI respondents to sequence 1"
