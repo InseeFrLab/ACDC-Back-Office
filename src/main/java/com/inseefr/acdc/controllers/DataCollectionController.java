@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/data-collections")
 @Tag(name="Campagnes (Data Collection) Controller")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 @Slf4j
 public class DataCollectionController {
     @Autowired
