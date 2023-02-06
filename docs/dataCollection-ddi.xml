@@ -1,5 +1,5 @@
 <FragmentInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="ddi:instance:3_3 ./DDI_3_3_2020-04-15/DDI_L_3_3_2020_04_15/XMLSchema/instance.xsd"
+    xsi:schemaLocation="ddi:instance:3_3 C:/Users/YLZBWC/Documents/Standards/DDI/Schema/3.3/DDI_3_3_2020-04-15/DDI_L_3_3_2020_04_15/XMLSchema/instance.xsd"
     xmlns="ddi:instance:3_3" xmlns:r="ddi:reusable:3_3" xmlns:d="ddi:datacollection:3_3">
     <TopLevelReference>
         <r:Agency>fr.insee</r:Agency>
@@ -81,10 +81,10 @@
                         ]
                     </r:AttributeValue>
                 </r:UserAttributePair>
-                <d:CollectionEventName>
+                <r:CollectionEventName>
                     <r:String xml:lang="fr-FR">Lot 1</r:String>
                     <r:String xml:lang="en-IE">Batch 1</r:String>
-                </d:CollectionEventName>
+                </r:CollectionEventName>
                 <r:Label>
                     <r:Content xml:lang="fr-FR">Lot pour les répondants CAWI de la séquence
                         1</r:Content>
@@ -163,7 +163,7 @@
             <d:CollectionEvent isUniversallyUnique="true">
                 <r:URN>urn:ddi:fr.insee:833e9208-6b6a-46d3-b8ad-ee5525c8fa4g:1</r:URN>
                 <r:Agency>fr.insee</r:Agency>
-                <r:ID>833e9208-6b6a-46d3-b8ad-ee5525c8fa4f</r:ID>
+                <r:ID>833e9208-6b6a-46d3-b8ad-ee5525c8fa4g</r:ID>
                 <r:Version>1</r:Version>
                 <d:CollectionEventName>
                     <r:String xml:lang="fr-FR">Lot 3</r:String>
