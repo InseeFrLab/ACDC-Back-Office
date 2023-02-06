@@ -1,5 +1,5 @@
 <FragmentInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="ddi:instance:3_3 C:/Users/YLZBWC/Documents/Standards/DDI/Schema/3.3/DDI_3_3_2020-04-15/DDI_L_3_3_2020_04_15/XMLSchema/instance.xsd"
+    xsi:schemaLocation="ddi:instance:3_3 https://ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
     xmlns="ddi:instance:3_3" xmlns:r="ddi:reusable:3_3" xmlns:d="ddi:datacollection:3_3">
     <TopLevelReference>
         <r:Agency>fr.insee</r:Agency>
@@ -81,10 +81,10 @@
                         ]
                     </r:AttributeValue>
                 </r:UserAttributePair>
-                <r:CollectionEventName>
+                <d:CollectionEventName>
                     <r:String xml:lang="fr-FR">Lot 1</r:String>
                     <r:String xml:lang="en-IE">Batch 1</r:String>
-                </r:CollectionEventName>
+                </d:CollectionEventName>
                 <r:Label>
                     <r:Content xml:lang="fr-FR">Lot pour les répondants CAWI de la séquence
                         1</r:Content>
