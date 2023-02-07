@@ -1,27 +1,21 @@
-<FragmentInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+<Fragment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="ddi:instance:3_3 https://ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
     xmlns="ddi:instance:3_3" xmlns:r="ddi:reusable:3_3" xmlns:d="ddi:datacollection:3_3">
-    <TopLevelReference>
+    <d:DataCollection isUniversallyUnique="true" versionDate="2022-05-12T00:00:00Z">
+        <r:URN>urn:ddi:fr.insee:39e00da9-c1bc-4019-9672-0dbfa0d0c73a:1</r:URN>
         <r:Agency>fr.insee</r:Agency>
-        <r:ID>6ee79de5-1de1-4221-b056-37f094f33aa8</r:ID>
+        <r:ID>39e00da9-c1bc-4019-9672-0dbfa0d0c73a</r:ID>
         <r:Version>1</r:Version>
-        <r:TypeOfObject>DataCollection</r:TypeOfObject>
-    </TopLevelReference>
-    <Fragment>
-        <d:DataCollection isUniversallyUnique="true" versionDate="2022-05-12T00:00:00Z">
-            <r:URN>urn:ddi:fr.insee:39e00da9-c1bc-4019-9672-0dbfa0d0c73a:1</r:URN>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>39e00da9-c1bc-4019-9672-0dbfa0d0c73a</r:ID>
-            <r:Version>1</r:Version>
-            <!-- Used for defining group of CollectionEvent  -->
-            <r:UserAttributePair>
-                <r:AttributeKey>extension:CollectionEventGroup</r:AttributeKey>
+        <!-- Used for defining group of CollectionEvent  -->
+        <r:UserAttributePair>
+            <r:AttributeKey>extension:CollectionEventGroup</r:AttributeKey>
 
-                <r:AttributeValue/>
-            </r:UserAttributePair>
-            <r:UserAttributePair>
-                <r:AttributeKey>extension:CollectionEventGroup</r:AttributeKey>
-                <r:AttributeValue>[
+            <r:AttributeValue/>
+        </r:UserAttributePair>
+        <r:UserAttributePair>
+            <r:AttributeKey>extension:CollectionEventGroup</r:AttributeKey>
+            <r:AttributeValue>[
                     {
                     "label": {
                     "fr-FR": "Groupe de lots numéro 1",
@@ -43,29 +37,28 @@
                     ]
                     }
                     ]</r:AttributeValue>
-            </r:UserAttributePair>
-            <r:Label>
-                <r:Content xml:lang="fr-FR">Collecte de données pour l'enquête logement
-                    2023</r:Content>
-                <r:Content xml:lang="en-IE">Data collection for household survey 2023</r:Content>
-            </r:Label>
-            <r:Description>
-                <r:Content xml:lang="fr-FR">Collecte de données pour l'enquête logement 2023. La
-                    collecte de données est découpée en considérant les séquences de questionnaire,
-                    le mode de collecte et type communication.</r:Content>
-                <r:Content xml:lang="en-IE">Data collection for household survey 2023. Data
-                    collection is splitted considering sequences of questionnaire, collection mode
-                    and type of communication.</r:Content>
-            </r:Description>
-            <d:CollectionEvent isUniversallyUnique="true">
-                <r:URN>urn:ddi:fr.insee:833e9208-6b6a-46d3-b8ad-ee5525c8fa4e:1</r:URN>
-                <r:Agency>fr.insee</r:Agency>
-                <r:ID>833e9208-6b6a-46d3-b8ad-ee5525c8fa4e</r:ID>
-                <r:Version>1</r:Version>
-                <!-- Used for defining collection communication steps -->
-                <r:UserAttributePair>
-                    <r:AttributeKey>extension:CollectionCommunicationSteps</r:AttributeKey>
-                    <r:AttributeValue>[
+        </r:UserAttributePair>
+        <r:Label>
+            <r:Content xml:lang="fr-FR">Collecte de données pour l'enquête logement 2023</r:Content>
+            <r:Content xml:lang="en-IE">Data collection for household survey 2023</r:Content>
+        </r:Label>
+        <r:Description>
+            <r:Content xml:lang="fr-FR">Collecte de données pour l'enquête logement 2023. La
+                collecte de données est découpée en considérant les séquences de questionnaire, le
+                mode de collecte et type communication.</r:Content>
+            <r:Content xml:lang="en-IE">Data collection for household survey 2023. Data collection
+                is splitted considering sequences of questionnaire, collection mode and type of
+                communication.</r:Content>
+        </r:Description>
+        <d:CollectionEvent isUniversallyUnique="true">
+            <r:URN>urn:ddi:fr.insee:833e9208-6b6a-46d3-b8ad-ee5525c8fa4e:1</r:URN>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>833e9208-6b6a-46d3-b8ad-ee5525c8fa4e</r:ID>
+            <r:Version>1</r:Version>
+            <!-- Used for defining collection communication steps -->
+            <r:UserAttributePair>
+                <r:AttributeKey>extension:CollectionCommunicationSteps</r:AttributeKey>
+                <r:AttributeValue>[
                         {
                         "id": "uid1",
                         "type": "opening",
@@ -80,118 +73,117 @@
                         }
                         ]
                     </r:AttributeValue>
-                </r:UserAttributePair>
-                <d:CollectionEventName>
-                    <r:String xml:lang="fr-FR">Lot 1</r:String>
-                    <r:String xml:lang="en-IE">Batch 1</r:String>
-                </d:CollectionEventName>
-                <r:Label>
-                    <r:Content xml:lang="fr-FR">Lot pour les répondants CAWI de la séquence
-                        1</r:Content>
-                    <r:Content xml:lang="en-IE">Batch for CAWI respondents to sequence 1</r:Content>
-                </r:Label>
-                <r:Description>
-                    <r:Content xml:lang="fr-FR">Description du lot 1</r:Content>
-                    <r:Content xml:lang="en-IE">Description for batch 1</r:Content>
-                </r:Description>
-                <d:DataCollectionDate>
-                    <r:StartDate>2022-05-12T00:00:00Z</r:StartDate>
-                    <r:EndDate>2022-05-26T00:00:00Z</r:EndDate>
-                </d:DataCollectionDate>
-                <d:ModeOfCollection isUniversallyUnique="true">
-                    <!-- Controlled vocabulary to be used -->
-                    <r:URN>urn:ddi:fr.insee:28a64fd8-722e-4a76-bb53-894700d5e77f:1</r:URN>
-                    <r:Agency>fr.insee</r:Agency>
-                    <r:ID>28a64fd8-722e-4a76-bb53-894700d5e77f</r:ID>
-                    <r:Version>1</r:Version>
-                    <d:TypeOfModeOfCollection>CAPI</d:TypeOfModeOfCollection>
-                </d:ModeOfCollection>
-                <d:ModeOfCollection isUniversallyUnique="true">
-                    <r:URN>urn:ddi:fr.insee:28a64fd8-722e-4a76-bb53-894700d5e77f:1</r:URN>
-                    <r:Agency>fr.insee</r:Agency>
-                    <r:ID>28a64fd8-722e-4a76-bb53-894700d5e77f</r:ID>
-                    <r:Version>1</r:Version>
-                    <d:TypeOfModeOfCollection>CAWI</d:TypeOfModeOfCollection>
-                </d:ModeOfCollection>
-                <!-- Reference to questionnaire model -->
-                <d:InstrumentReference>
-                    <r:Agency>fr.insee</r:Agency>
-                    <r:ID>493f8b38-1198-4e45-99d2-531ac8a48a4i</r:ID>
-                    <r:Version>1</r:Version>
-                    <r:TypeOfObject>Instrument</r:TypeOfObject>
-                </d:InstrumentReference>
-            </d:CollectionEvent>
-            <d:CollectionEvent isUniversallyUnique="true">
-                <r:URN>urn:ddi:fr.insee:833e9208-6b6a-46d3-b8ad-ee5525c8fa4f:1</r:URN>
+            </r:UserAttributePair>
+            <d:CollectionEventName>
+                <r:String xml:lang="fr-FR">Lot 1</r:String>
+                <r:String xml:lang="en-IE">Batch 1</r:String>
+            </d:CollectionEventName>
+            <r:Label>
+                <r:Content xml:lang="fr-FR">Lot pour les répondants CAWI de la séquence
+                    1</r:Content>
+                <r:Content xml:lang="en-IE">Batch for CAWI respondents to sequence 1</r:Content>
+            </r:Label>
+            <r:Description>
+                <r:Content xml:lang="fr-FR">Description du lot 1</r:Content>
+                <r:Content xml:lang="en-IE">Description for batch 1</r:Content>
+            </r:Description>
+            <d:DataCollectionDate>
+                <r:StartDate>2022-05-12T00:00:00Z</r:StartDate>
+                <r:EndDate>2022-05-26T00:00:00Z</r:EndDate>
+            </d:DataCollectionDate>
+            <d:ModeOfCollection isUniversallyUnique="true">
+                <!-- Controlled vocabulary to be used -->
+                <r:URN>urn:ddi:fr.insee:28a64fd8-722e-4a76-bb53-894700d5e77f:1</r:URN>
                 <r:Agency>fr.insee</r:Agency>
-                <r:ID>833e9208-6b6a-46d3-b8ad-ee5525c8fa4f</r:ID>
+                <r:ID>28a64fd8-722e-4a76-bb53-894700d5e77f</r:ID>
                 <r:Version>1</r:Version>
-                <d:CollectionEventName>
-                    <r:String xml:lang="fr-FR">Lot 2</r:String>
-                    <r:String xml:lang="en-IE">Batch 2</r:String>
-                </d:CollectionEventName>
-                <r:Label>
-                    <r:Content xml:lang="fr-FR">Lot pour les répondants CAWI de la séquence
-                        1</r:Content>
-                    <r:Content xml:lang="en-IE">Batch for CAWI respondents to sequence 1</r:Content>
-                </r:Label>
-                <d:DataCollectionDate>
-                    <r:StartDate>2022-05-12T00:00:00Z</r:StartDate>
-                    <r:EndDate>2022-05-26T00:00:00Z</r:EndDate>
-                </d:DataCollectionDate>
-                <d:ModeOfCollection isUniversallyUnique="true">
-                    <r:URN>urn:ddi:fr.insee:28a64fd8-722e-4a76-bb53-894700d5e77f:1</r:URN>
-                    <r:Agency>fr.insee</r:Agency>
-                    <r:ID>28a64fd8-722e-4a76-bb53-894700d5e77f</r:ID>
-                    <r:Version>1</r:Version>
-                    <d:TypeOfModeOfCollection>CAPI</d:TypeOfModeOfCollection>
-                </d:ModeOfCollection>
-                <d:ModeOfCollection isUniversallyUnique="true">
-                    <r:URN>urn:ddi:fr.insee:28a64fd8-722e-4a76-bb53-894700d5e77f:1</r:URN>
-                    <r:Agency>fr.insee</r:Agency>
-                    <r:ID>28a64fd8-722e-4a76-bb53-894700d5e77f</r:ID>
-                    <r:Version>1</r:Version>
-                    <d:TypeOfModeOfCollection>CAWI</d:TypeOfModeOfCollection>
-                </d:ModeOfCollection>
-                <d:InstrumentReference>
-                    <r:Agency>fr.insee</r:Agency>
-                    <r:ID>493f8b38-1198-4e45-99d2-531ac8a48a48</r:ID>
-                    <r:Version>1</r:Version>
-                    <r:TypeOfObject>Instrument</r:TypeOfObject>
-                </d:InstrumentReference>
-            </d:CollectionEvent>
-            <d:CollectionEvent isUniversallyUnique="true">
-                <r:URN>urn:ddi:fr.insee:833e9208-6b6a-46d3-b8ad-ee5525c8fa4g:1</r:URN>
+                <d:TypeOfModeOfCollection>CAPI</d:TypeOfModeOfCollection>
+            </d:ModeOfCollection>
+            <d:ModeOfCollection isUniversallyUnique="true">
+                <r:URN>urn:ddi:fr.insee:28a64fd8-722e-4a76-bb53-894700d5e77f:1</r:URN>
                 <r:Agency>fr.insee</r:Agency>
-                <r:ID>833e9208-6b6a-46d3-b8ad-ee5525c8fa4g</r:ID>
+                <r:ID>28a64fd8-722e-4a76-bb53-894700d5e77f</r:ID>
                 <r:Version>1</r:Version>
-                <d:CollectionEventName>
-                    <r:String xml:lang="fr-FR">Lot 3</r:String>
-                    <r:String xml:lang="en-IE">Batch 3</r:String>
-                </d:CollectionEventName>
-                <r:Label>
-                    <r:Content xml:lang="fr-FR">Lot pour les répondants CAWI de la séquence
-                        1</r:Content>
-                    <r:Content xml:lang="en-IE">Batch for CAWI respondents to sequence 1</r:Content>
-                </r:Label>
-                <d:DataCollectionDate>
-                    <r:StartDate>2022-05-25T00:00:00</r:StartDate>
-                    <r:EndDate>2022-05-30T00:00:00</r:EndDate>
-                </d:DataCollectionDate>
-                <d:ModeOfCollection isUniversallyUnique="true">
-                    <r:URN>urn:ddi:fr.insee:28a64fd8-722e-4a76-bb53-894700d5e77f:1</r:URN>
-                    <r:Agency>fr.insee</r:Agency>
-                    <r:ID>28a64fd8-722e-4a76-bb53-894700d5e77f</r:ID>
-                    <r:Version>1</r:Version>
-                    <d:TypeOfModeOfCollection>CATI</d:TypeOfModeOfCollection>
-                </d:ModeOfCollection>
-                <d:InstrumentReference>
-                    <r:Agency>fr.insee</r:Agency>
-                    <r:ID>493f8b38-1198-4e45-99d2-531ac8a48a49</r:ID>
-                    <r:Version>1</r:Version>
-                    <r:TypeOfObject>Instrument</r:TypeOfObject>
-                </d:InstrumentReference>
-            </d:CollectionEvent>
-        </d:DataCollection>
-    </Fragment>
-</FragmentInstance>
+                <d:TypeOfModeOfCollection>CAWI</d:TypeOfModeOfCollection>
+            </d:ModeOfCollection>
+            <!-- Reference to questionnaire model -->
+            <d:InstrumentReference>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID>493f8b38-1198-4e45-99d2-531ac8a48a4i</r:ID>
+                <r:Version>1</r:Version>
+                <r:TypeOfObject>Instrument</r:TypeOfObject>
+            </d:InstrumentReference>
+        </d:CollectionEvent>
+        <d:CollectionEvent isUniversallyUnique="true">
+            <r:URN>urn:ddi:fr.insee:833e9208-6b6a-46d3-b8ad-ee5525c8fa4f:1</r:URN>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>833e9208-6b6a-46d3-b8ad-ee5525c8fa4f</r:ID>
+            <r:Version>1</r:Version>
+            <d:CollectionEventName>
+                <r:String xml:lang="fr-FR">Lot 2</r:String>
+                <r:String xml:lang="en-IE">Batch 2</r:String>
+            </d:CollectionEventName>
+            <r:Label>
+                <r:Content xml:lang="fr-FR">Lot pour les répondants CAWI de la séquence
+                    1</r:Content>
+                <r:Content xml:lang="en-IE">Batch for CAWI respondents to sequence 1</r:Content>
+            </r:Label>
+            <d:DataCollectionDate>
+                <r:StartDate>2022-05-12T00:00:00Z</r:StartDate>
+                <r:EndDate>2022-05-26T00:00:00Z</r:EndDate>
+            </d:DataCollectionDate>
+            <d:ModeOfCollection isUniversallyUnique="true">
+                <r:URN>urn:ddi:fr.insee:28a64fd8-722e-4a76-bb53-894700d5e77f:1</r:URN>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID>28a64fd8-722e-4a76-bb53-894700d5e77f</r:ID>
+                <r:Version>1</r:Version>
+                <d:TypeOfModeOfCollection>CAPI</d:TypeOfModeOfCollection>
+            </d:ModeOfCollection>
+            <d:ModeOfCollection isUniversallyUnique="true">
+                <r:URN>urn:ddi:fr.insee:28a64fd8-722e-4a76-bb53-894700d5e77f:1</r:URN>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID>28a64fd8-722e-4a76-bb53-894700d5e77f</r:ID>
+                <r:Version>1</r:Version>
+                <d:TypeOfModeOfCollection>CAWI</d:TypeOfModeOfCollection>
+            </d:ModeOfCollection>
+            <d:InstrumentReference>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID>493f8b38-1198-4e45-99d2-531ac8a48a48</r:ID>
+                <r:Version>1</r:Version>
+                <r:TypeOfObject>Instrument</r:TypeOfObject>
+            </d:InstrumentReference>
+        </d:CollectionEvent>
+        <d:CollectionEvent isUniversallyUnique="true">
+            <r:URN>urn:ddi:fr.insee:833e9208-6b6a-46d3-b8ad-ee5525c8fa4g:1</r:URN>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>833e9208-6b6a-46d3-b8ad-ee5525c8fa4g</r:ID>
+            <r:Version>1</r:Version>
+            <d:CollectionEventName>
+                <r:String xml:lang="fr-FR">Lot 3</r:String>
+                <r:String xml:lang="en-IE">Batch 3</r:String>
+            </d:CollectionEventName>
+            <r:Label>
+                <r:Content xml:lang="fr-FR">Lot pour les répondants CAWI de la séquence
+                    1</r:Content>
+                <r:Content xml:lang="en-IE">Batch for CAWI respondents to sequence 1</r:Content>
+            </r:Label>
+            <d:DataCollectionDate>
+                <r:StartDate>2022-05-25T00:00:00</r:StartDate>
+                <r:EndDate>2022-05-30T00:00:00</r:EndDate>
+            </d:DataCollectionDate>
+            <d:ModeOfCollection isUniversallyUnique="true">
+                <r:URN>urn:ddi:fr.insee:28a64fd8-722e-4a76-bb53-894700d5e77f:1</r:URN>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID>28a64fd8-722e-4a76-bb53-894700d5e77f</r:ID>
+                <r:Version>1</r:Version>
+                <d:TypeOfModeOfCollection>CATI</d:TypeOfModeOfCollection>
+            </d:ModeOfCollection>
+            <d:InstrumentReference>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID>493f8b38-1198-4e45-99d2-531ac8a48a49</r:ID>
+                <r:Version>1</r:Version>
+                <r:TypeOfObject>Instrument</r:TypeOfObject>
+            </d:InstrumentReference>
+        </d:CollectionEvent>
+    </d:DataCollection>
+</Fragment>
