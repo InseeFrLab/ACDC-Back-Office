@@ -3,16 +3,11 @@
     xsi:schemaLocation="ddi:instance:3_3 https://ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
     xmlns="ddi:instance:3_3" xmlns:r="ddi:reusable:3_3" xmlns:d="ddi:datacollection:3_3">
     <d:DataCollection isUniversallyUnique="true" versionDate="2022-05-12T00:00:00Z">
-        <r:URN>urn:ddi:fr.insee:39e00da9-c1bc-4019-9672-0dbfa0d0c73a:1</r:URN>
+        <r:URN>urn:ddi:fr.insee:39e00da9-c1bc-4019-9672-0dbfa0d0c73e:1</r:URN>
         <r:Agency>fr.insee</r:Agency>
-        <r:ID>39e00da9-c1bc-4019-9672-0dbfa0d0c73a</r:ID>
+        <r:ID>39e00da9-c1bc-4019-9672-0dbfa0d0c73e</r:ID>
         <r:Version>1</r:Version>
         <!-- Used for defining group of CollectionEvent  -->
-        <r:UserAttributePair>
-            <r:AttributeKey>extension:CollectionEventGroup</r:AttributeKey>
-
-            <r:AttributeValue/>
-        </r:UserAttributePair>
         <r:UserAttributePair>
             <r:AttributeKey>extension:CollectionEventGroup</r:AttributeKey>
             <r:AttributeValue>[
@@ -109,7 +104,7 @@
             <!-- Reference to questionnaire model -->
             <d:InstrumentReference>
                 <r:Agency>fr.insee</r:Agency>
-                <r:ID>493f8b38-1198-4e45-99d2-531ac8a48a4i</r:ID>
+                <r:ID>9d63919d-796d-49ec-8a3a-af5962af6a96</r:ID>
                 <r:Version>1</r:Version>
                 <r:TypeOfObject>Instrument</r:TypeOfObject>
             </d:InstrumentReference>
@@ -139,7 +134,7 @@
                 <r:Version>1</r:Version>
                 <d:TypeOfModeOfCollection>CAPI</d:TypeOfModeOfCollection>
             </d:ModeOfCollection>
-            <d:ModeOfCollection isUniversallyUnique="true">
+            <d:ModeOfCollection>
                 <r:URN>urn:ddi:fr.insee:28a64fd8-722e-4a76-bb53-894700d5e77f:1</r:URN>
                 <r:Agency>fr.insee</r:Agency>
                 <r:ID>28a64fd8-722e-4a76-bb53-894700d5e77f</r:ID>
@@ -148,7 +143,7 @@
             </d:ModeOfCollection>
             <d:InstrumentReference>
                 <r:Agency>fr.insee</r:Agency>
-                <r:ID>493f8b38-1198-4e45-99d2-531ac8a48a48</r:ID>
+                <r:ID>9d63919d-796d-49ec-8a3a-af5962af6a96</r:ID>
                 <r:Version>1</r:Version>
                 <r:TypeOfObject>Instrument</r:TypeOfObject>
             </d:InstrumentReference>
@@ -180,7 +175,7 @@
             </d:ModeOfCollection>
             <d:InstrumentReference>
                 <r:Agency>fr.insee</r:Agency>
-                <r:ID>493f8b38-1198-4e45-99d2-531ac8a48a49</r:ID>
+                <r:ID>9d63919d-796d-49ec-8a3a-af5962af6a96</r:ID>
                 <r:Version>1</r:Version>
                 <r:TypeOfObject>Instrument</r:TypeOfObject>
             </d:InstrumentReference>
