@@ -11,6 +11,22 @@
         "fr-FR": "Collecte de données pour l'enquête logement 2023. La collecte de données est découpée en considérant les séquences de questionnaire, le mode de collecte et type communication.",
         "en-IE": "Data collection for household survey 2023. Data collection is splitted considering sequences of questionnaire, collection mode and type of communication."
     },
+    "studyUnitReference": {
+        "id": "62a0a1ec-0fc3-4aaf-bc55-e26fd80347c9",
+        "label": {
+            "fr-FR": "Enquête Logement 2023",
+            "en-IE": "Household survey 2023"
+        },
+        "typeOfObject": "StudyUnit",
+        "groupeReference": {
+            "id": "586a6306-c67d-4fda-a0ce-7e96564bda58",
+            "label": {
+                "fr-FR": "Enquête logement",
+                "en-IE": "Household survey"
+            },
+            "typeOfObject": "Group"
+        }
+    },
     "userAttributePair": [
         {
             "attributeKey": "extension:CollectionEventGroup",
