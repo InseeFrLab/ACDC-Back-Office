@@ -28,3 +28,5 @@ spec:
               value: jdbc:postgresql://acdc-database-postgresql/
             - name: FR_INSEE_POGUES_URI
               value: https://pogues-back-office.demo.insee.io/
+            - name: FR_INSEE_MAGMA_URI
+              value: https://api-rmes-gestion.demo.insee.io/magma/
