@@ -24,5 +24,20 @@ public class ExternalController {
         log.info("Get questionnaires data from Pogues");
         return ResponseEntity.ok(externalService.getQuestionnaires());
     }
+
+    @Operation(summary= "Retrieve series from Magma Back Office")
+    @GetMapping(value= "/magma/series", produces = "application/json")
+    public ResponseEntity<String> getSeriesFromMagma() {
+        log.info("Get series data from Magma");
+        return ResponseEntity.ok(externalService.getSeries());
+    }
+
+    @Operation(summary="Retrieve operations by series from Magma Back Office")
+    @GetMapping(value= "/magma/operations/{id}", produces = "application/json")
+    public ResponseEntity<String> getOperationsBySeriesFromMagma(@PathVariable String id) {
+        log.info("Get operations by series data from Magma");
+        return ResponseEntity.ok(externalService.getSeriesOperationById(id));
+    }
+
 }
 
