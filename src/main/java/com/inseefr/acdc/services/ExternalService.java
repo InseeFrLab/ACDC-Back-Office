@@ -43,6 +43,7 @@ public class ExternalService {
     }
 
     public String getSeries(){
+        log.info("Get series from Magma");
         HttpClient client = HttpClient.newHttpClient();
         String url = magmaUri + "operations/series";
         HttpRequest request = HttpRequest.newBuilder()
@@ -64,6 +65,7 @@ public class ExternalService {
     }
 
     public String getSeriesOperationById(String id){
+        log.info("Get series operation by id from Magma");
         HttpClient client = HttpClient.newHttpClient();
         String url = magmaUri + "operations/series/" + id+"/operations";
         HttpRequest request = HttpRequest.newBuilder()
