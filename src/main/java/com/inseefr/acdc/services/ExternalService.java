@@ -21,7 +21,7 @@ public class ExternalService {
     private String magmaUri;
 
     public String getQuestionnaires(){
-
+        log.info("Get questionnaires from Pogues");
         HttpClient client = HttpClient.newHttpClient();
         String url = poguesUri + "api/persistence/questionnaires";
         HttpRequest request = HttpRequest.newBuilder()
@@ -38,7 +38,6 @@ public class ExternalService {
             e.printStackTrace();
 
         }
-        log.info("Response from Pogues: " + response.body());
         return response.body();
     }
 
@@ -60,7 +59,6 @@ public class ExternalService {
             e.printStackTrace();
 
         }
-        log.info("Response from Magma: " + response.body());
         return response.body();
     }
 
@@ -82,7 +80,6 @@ public class ExternalService {
             e.printStackTrace();
 
         }
-        log.info("Response from Magma: " + response.body());
         return response.body();
     }
 }
