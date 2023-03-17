@@ -93,6 +93,7 @@ public class ExternalService {
     public String convertAndSendToColectica(String dataCollectionID){
 
         try {
+            log.info("DataCollection JSON Raw: " + dataCollectionService.getDataCollectionById(dataCollectionID).getJson());
             String jsonData = dataCollectionService.getDataCollectionById(dataCollectionID).getJson().toString();
             log.info("DataCollection JSON: " + jsonData);
 
