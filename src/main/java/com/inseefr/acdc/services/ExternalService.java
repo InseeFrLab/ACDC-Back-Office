@@ -12,6 +12,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.*;
 
+import static com.inseefr.acdc.services.DDIService.JsonToDDIConverter;
+
 @Service
 @Slf4j
 public class ExternalService {
@@ -90,33 +92,38 @@ public class ExternalService {
 
     public String convertAndSendToColectica(String dataCollectionID){
 
-        String jsonData = dataCollectionService.getDataCollectionById(dataCollectionID).getJson().toString();
-        log.info("DataCollection JSON: " + jsonData);
-        String ddiContent = DDIService.JsonToDDIConverter(dataCollectionID);
-        UUID uuid = UUID.randomUUID();
-        String identifier = uuid.toString();
-        Map<String, Object> item = new LinkedHashMap<>();
-        item.put("ItemType", "c5084916-9936-47a9-a523-93be9fd816d8");
-        item.put("AgencyId", "someAgency");
-        item.put("Version", 1);
-        item.put("Identifier", identifier);
-        item.put("Item", ddiContent); // pass someItem as a command line argument
-        item.put("VersionDate", "2023-01-23T11:53:37.1700000Z");
-        item.put("VersionResponsibility", "someUser"); // pass someUser as a command line argument
-        item.put("IsPublished", false);
-        item.put("IsDeprecated", false);
-        item.put("IsProvisional", false);
-        item.put("ItemFormat", "DC337820-AF3A-4C0B-82F9-CF02535CDE83");
+        try {
+            String jsonData = dataCollectionService.getDataCollectionById(dataCollectionID).getJson().toString();
+            log.info("DataCollection JSON: " + jsonData);
 
-        List<Map<String, Object>> items = new ArrayList<>();
-        items.add(item);
+            String ddiContent = JsonToDDIConverter(jsonData); // convert JSON to DDI format using the JsonToDDIConverter function
 
-        Map<String, Object> json = new LinkedHashMap<>();
-        json.put("Items", items);
+            UUID uuid = UUID.randomUUID();
+            String identifier = uuid.toString();
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("ItemType", "c5084916-9936-47a9-a523-93be9fd816d8");
+            item.put("AgencyId", "someAgency");
+            item.put("Version", 1);
+            item.put("Identifier", identifier);
+            item.put("Item", ddiContent); // pass the DDI-formatted XML string to the "Item" field
+            item.put("VersionDate", "2023-01-23T11:53:37.1700000Z");
+            item.put("VersionResponsibility", "someUser"); // pass someUser as a command line argument
+            item.put("IsPublished", false);
+            item.put("IsDeprecated", false);
+            item.put("IsProvisional", false);
+            item.put("ItemFormat", "DC337820-AF3A-4C0B-82F9-CF02535CDE83");
 
-        log.info("JSON: " + json.toString());
+            List<Map<String, Object>> items = new ArrayList<>();
+            items.add(item);
 
-        //Temp return type
-        return json.toString();
-    }
+            Map<String, Object> json = new LinkedHashMap<>();
+            json.put("Items", items);
+
+            log.info("JSON: " + json.toString());
+
+            return json.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
 }
