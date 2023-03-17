@@ -39,5 +39,12 @@ public class ExternalController {
         return ResponseEntity.ok(externalService.getSeriesOperationById(id));
     }
 
+    @Operation(summary="(TEMP) concert DataCollection to DDI format & create json to be send to Colectica")
+    @GetMapping(value="publish/{id}", produces = "application/json")
+    public ResponseEntity<String> publishDataCollection(@PathVariable String id) {
+        log.info("Publish data collection");
+        return ResponseEntity.ok(externalService.convertAndSendToColectica(id));
+    }
+
 }
 
