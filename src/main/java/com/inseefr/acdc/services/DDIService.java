@@ -12,7 +12,7 @@ import java.io.StringWriter;
 @Service
 @Slf4j
 public class DDIService {
-    public static void JsonToDDIConverter(String jsonData) {
+    public static String JsonToDDIConverter(String jsonData) {
         try {
             // Create an instance of ObjectMapper to convert JSON to Java object
             ObjectMapper objectMapper = new ObjectMapper();
@@ -30,9 +30,11 @@ public class DDIService {
 
             // Do something with the DDI-formatted XML string
             System.out.println(xmlData);
+            return xmlData;
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "";
     }
 }
