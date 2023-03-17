@@ -26,4 +26,5 @@ public class InstrumentReference {
     private String agency;
     private int version;
     private String typeOfObject;
+    private String label;
 }

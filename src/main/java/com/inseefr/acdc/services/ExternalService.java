@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -19,6 +20,9 @@ public class ExternalService {
 
     @Value("${fr.insee.magma.uri}")
     private String magmaUri;
+
+    @Autowired
+    private DataCollectionService dataCollectionService;
 
     public String getQuestionnaires(){
         log.info("Get questionnaires from Pogues");
@@ -81,5 +85,36 @@ public class ExternalService {
 
         }
         return response.body();
+    }
+
+    public String convertAndSendToColectica(String dataCollectionID){
+
+        String jsonData = dataCollectionService.getDataCollectionById(dataCollectionID).getJson().toString();
+        String ddiContent = DDIService.JsonToDDIConverter(dataCollectionID);
+        UUID uuid = UUID.randomUUID();
+        String identifier = uuid.toString();
+        Map<String, Object> item = new LinkedHashMap<>();
+        item.put("ItemType", "c5084916-9936-47a9-a523-93be9fd816d8");
+        item.put("AgencyId", "someAgency");
+        item.put("Version", 1);
+        item.put("Identifier", identifier);
+        item.put("Item", ddiContent); // pass someItem as a command line argument
+        item.put("VersionDate", "2023-01-23T11:53:37.1700000Z");
+        item.put("VersionResponsibility", "someUser"); // pass someUser as a command line argument
+        item.put("IsPublished", false);
+        item.put("IsDeprecated", false);
+        item.put("IsProvisional", false);
+        item.put("ItemFormat", "DC337820-AF3A-4C0B-82F9-CF02535CDE83");
+
+        List<Map<String, Object>> items = new ArrayList<>();
+        items.add(item);
+
+        Map<String, Object> json = new LinkedHashMap<>();
+        json.put("Items", items);
+
+        System.out.println(json);
+
+        //Temp return type
+        return json.toString();
     }
 }
