@@ -17,6 +17,7 @@ public class DDIService {
             // Create an instance of ObjectMapper to convert JSON to Java object
             ObjectMapper objectMapper = new ObjectMapper();
             DataCollectionObject DataCollection = objectMapper.readValue(jsonData, DataCollectionObject.class);
+            log.info("DataCollectionObject: " + DataCollection.toString());
 
             // Create an instance of JAXBContext and Marshaller to convert Java object to XML
             JAXBContext jaxbContext = JAXBContext.newInstance(DataCollectionObject.class);
@@ -29,7 +30,7 @@ public class DDIService {
             String xmlData = sw.toString();
 
             // Do something with the DDI-formatted XML string
-            System.out.println(xmlData);
+            log.info("DDI-formatted XML string: " + xmlData);
             return xmlData;
 
         } catch (Exception e) {

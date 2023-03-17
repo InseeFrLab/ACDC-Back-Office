@@ -91,6 +91,7 @@ public class ExternalService {
     public String convertAndSendToColectica(String dataCollectionID){
 
         String jsonData = dataCollectionService.getDataCollectionById(dataCollectionID).getJson().toString();
+        log.info("DataCollection JSON: " + jsonData);
         String ddiContent = DDIService.JsonToDDIConverter(dataCollectionID);
         UUID uuid = UUID.randomUUID();
         String identifier = uuid.toString();
@@ -113,7 +114,7 @@ public class ExternalService {
         Map<String, Object> json = new LinkedHashMap<>();
         json.put("Items", items);
 
-        System.out.println(json);
+        log.info("JSON: " + json.toString());
 
         //Temp return type
         return json.toString();
