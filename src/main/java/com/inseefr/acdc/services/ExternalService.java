@@ -1,5 +1,6 @@
 package com.inseefr.acdc.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
@@ -12,8 +13,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.*;
 
-import static com.inseefr.acdc.services.DDIService.JsonToDDIConverter;
-
 @Service
 @Slf4j
 public class ExternalService {
@@ -24,7 +23,7 @@ public class ExternalService {
     private String magmaUri;
 
     @Autowired
-    private DataCollectionService dataCollectionService;
+    private DDIService ddiService;
 
     public String getQuestionnaires(){
 
@@ -93,11 +92,8 @@ public class ExternalService {
     public String convertAndSendToColectica(String dataCollectionID){
 
         try {
-            log.info("DataCollection JSON Raw: " + dataCollectionService.getDataCollectionById(dataCollectionID).getJson());
-            String jsonData = dataCollectionService.getDataCollectionById(dataCollectionID).getJson().toString();
-            log.info("DataCollection JSON: " + jsonData);
 
-            String ddiContent = JsonToDDIConverter(jsonData); // convert JSON to DDI format using the JsonToDDIConverter function
+            String ddiContent = ddiService.JsonToDDIConverter(dataCollectionID); // convert JSON to DDI format using the JsonToDDIConverter function
 
             UUID uuid = UUID.randomUUID();
             String identifier = uuid.toString();

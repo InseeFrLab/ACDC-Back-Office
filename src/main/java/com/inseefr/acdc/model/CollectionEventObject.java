@@ -30,23 +30,28 @@ public class CollectionEventObject {
 
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
-    private List<Map<String,String>> collectionEventName;
+    private Map<String,String> collectionEventName;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
-    private List<Map<String,String>> label;
+    private Map<String,String> label;
+
+    @Type(JsonType.class)
+    @Column(columnDefinition = "jsonb")
+    private Map<String,String> description;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     private DataCollectionDate dataCollectionDate;
     @OneToMany(cascade = CascadeType.ALL)
     private List<TypeOfModeOfCollection> typeOfModeOfCollection;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<InstrumentReference> instrumentReference;
+    @Type(JsonType.class)
+    @Column(columnDefinition = "jsonb")
+    private InstrumentReference instrumentReference;
 
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
-    private List<CollectionUserAttributePair> userAttributePair;
+    private List<UserAttributePair> userAttributePair;
 
-    public CollectionEventObject(String agency, int version, List<Map<String, String>> label, DataCollectionDate dataCollectionDate, List<TypeOfModeOfCollection> typeOfModeOfCollection, List<InstrumentReference> instrumentReference, List<CollectionUserAttributePair> userAttributePair){
+    public CollectionEventObject(String agency, int version, Map<String,String> label, DataCollectionDate dataCollectionDate, List<TypeOfModeOfCollection> typeOfModeOfCollection, InstrumentReference instrumentReference, List<UserAttributePair> userAttributePair){
         this.agency = agency;
         this.version = version;
         this.label = label;

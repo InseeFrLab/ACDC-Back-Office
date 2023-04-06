@@ -19,10 +19,8 @@ import java.util.UUID;
 @Entity
 public class InstrumentReference {
     @Id
-    @GeneratedValue
-    @UuidGenerator
     @Column(name = "id", nullable = false, updatable = false)
-    private UUID id;
+    private String id;
     private String agency;
     private int version;
     private String typeOfObject;
