@@ -2,6 +2,7 @@ package com.inseefr.acdc.services;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -39,8 +40,7 @@ public class DDIService {
             ObjectMapper objectMapper = new ObjectMapper()
                     .registerModule(new JavaTimeModule())
                     .registerModule(new SimpleModule()
-                            .addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE)
-                            .addDeserializer(String.class, new AttributeValueDeserializer()));
+                            .addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE));
 
             JavaTimeModule javaTimeModule = new JavaTimeModule();
             javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(formatter));
@@ -50,8 +50,16 @@ public class DDIService {
             String jsonData = objectMapper.writeValueAsString(dataCollectionService.getDataCollectionById(dataCollectionID).getJson());
             log.info("DataCollection JSON: " + jsonData);
 
-            DataCollectionObject dataCollection = objectMapper.readValue(jsonData, DataCollectionObject.class);
+            JsonNode rootNode = objectMapper.readTree(jsonData);
+            JsonNode dataCollectionNode = rootNode.get("json");
+            if (dataCollectionNode == null) {
+                log.error("DataCollection JSON does not contain a 'dataCollection' field");
+                return "";
+            }
+
+            DataCollectionObject dataCollection = objectMapper.treeToValue(dataCollectionNode, DataCollectionObject.class);
             log.info("DataCollectionObject: " + dataCollection.toString());
+
 
             // Convert the Java object to XML using JAXB
             JAXBContext jaxbContext = JAXBContext.newInstance(DataCollectionObject.class);

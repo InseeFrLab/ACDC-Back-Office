@@ -1,5 +1,6 @@
 package com.inseefr.acdc.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.inseefr.acdc.domain.DataCollection;
 import com.inseefr.acdc.services.DataCollectionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,9 +40,9 @@ public class DataCollectionController {
     }
     @Operation(summary = "Save a new data collection")
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<DataCollection> saveDataCollection(@RequestBody DataCollection dataCollection) {
+    public ResponseEntity<DataCollection> saveDataCollection(@RequestBody String json) throws JsonProcessingException {
         log.info("Save data collection");
-        return ResponseEntity.ok(dataCollectionService.saveDataCollection(dataCollection));
+        return ResponseEntity.ok(dataCollectionService.saveDataCollection(json));
     }
     @Operation(summary = "Delete a data collection by its ID")
     @DeleteMapping(value= "/{id}")

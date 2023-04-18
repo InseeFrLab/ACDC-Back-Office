@@ -58,7 +58,6 @@ public class DataCollectionObject {
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     private ArrayList<UserAttributePair> userAttributePair;
-
     /**
      * Instantiates a new Data collection.
      *

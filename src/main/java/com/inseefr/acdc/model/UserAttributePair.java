@@ -1,13 +1,13 @@
 package com.inseefr.acdc.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
+import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -15,7 +15,8 @@ import java.util.Objects;
 @NoArgsConstructor
 public class UserAttributePair implements Serializable {
     private String attributeKey;
-    private List<String> attributeValue;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private String attributeValue;
 
     @Override
     public String toString() {
