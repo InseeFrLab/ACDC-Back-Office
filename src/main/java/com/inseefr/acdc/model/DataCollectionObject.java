@@ -48,6 +48,9 @@ public class DataCollectionObject {
     @Column(name = "id", nullable = false, updatable = false)
     @XmlElement(name="r:ID")
     private UUID id;
+
+    @XmlElement(name="r:URN")
+    private String urn;
     @XmlElement(name="r:Agency")
     private String agency;
 
@@ -99,7 +102,7 @@ public class DataCollectionObject {
         objectMapper.readerForUpdating(this).readValue(json);
     }
 
-    public DataCollectionObject(String id, Label label, String agency, int version, Description description, String versionDate, List<CollectionEventObject> collectionEvents, List<UserAttributePair> userAttributePair) {
+    public DataCollectionObject(String id, Label label, String agency, int version, Description description, String versionDate, List<CollectionEventObject> collectionEvents, List<UserAttributePair> userAttributePair, String urn) {
         this.id = UUID.fromString(id);
         this.agency = agency;
         this.version = version;
@@ -108,6 +111,7 @@ public class DataCollectionObject {
         this.description = description;
         this.collectionEvents = new ArrayList<>(collectionEvents);
         this.userAttributePair = new ArrayList<>(userAttributePair);
+        this.urn = urn;
     }
 
     public DataCollectionObject() {

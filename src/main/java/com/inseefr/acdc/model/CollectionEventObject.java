@@ -27,6 +27,9 @@ public class CollectionEventObject {
     @Column(name = "id", nullable = false, updatable = false)
     @XmlElement(name="r:ID")
     private UUID id;
+
+    @XmlElement(name="r:URN")
+    private String urn;
     @XmlElement(name="r:Agency")
     private String agency;
     @XmlElement(name="r:Version")
@@ -35,16 +38,16 @@ public class CollectionEventObject {
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     @XmlElement(name="d:CollectionEventName")
-    private Map<String,String> collectionEventName;
+    private CollectionEventName collectionEventName;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     @XmlElement(name="d:Label")
-    private Map<String,String> label;
+    private Label label;
 
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     @XmlElement(name="d:Description")
-    private Map<String,String> description;
+    private Description description;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     @XmlElement(name="d:DataCollectionDate")
@@ -62,7 +65,8 @@ public class CollectionEventObject {
     @XmlElement(name="d:UserAttributePair")
     private List<UserAttributePair> userAttributePair;
 
-    public CollectionEventObject(String agency, int version, Map<String,String> label, DataCollectionDate dataCollectionDate, List<TypeOfModeOfCollection> typeOfModeOfCollection, InstrumentReference instrumentReference, List<UserAttributePair> userAttributePair){
+    public CollectionEventObject(String id, String agency, int version, Label label, DataCollectionDate dataCollectionDate, List<TypeOfModeOfCollection> typeOfModeOfCollection, InstrumentReference instrumentReference, List<UserAttributePair> userAttributePair, String urn){
+        this.id = UUID.fromString(id);
         this.agency = agency;
         this.version = version;
         this.label = label;
@@ -70,10 +74,11 @@ public class CollectionEventObject {
         this.typeOfModeOfCollection = typeOfModeOfCollection;
         this.instrumentReference = instrumentReference;
         this.userAttributePair = userAttributePair;
+        this.urn = urn;
     }
 
-    public CollectionEventObject(String agency, int version) {
-
+    public CollectionEventObject(String id, String agency, int version) {
+        this.id = UUID.fromString(id);
         this.agency = agency;
         this.version = version;
     }

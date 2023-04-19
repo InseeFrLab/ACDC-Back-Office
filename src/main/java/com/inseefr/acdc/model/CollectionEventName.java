@@ -3,23 +3,21 @@ package com.inseefr.acdc.model;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-@XmlRootElement(name = "r:Label")
+@XmlRootElement(name = "d:CollectionEventName")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Label {
+public class CollectionEventName {
 
-    @XmlElement(name = "r:Content", namespace = "urn:oecd:ties:stf:v5")
+    @XmlElement(name = "r:Content")
     private List<Content> contentList;
 
-    public Label() {
+    public CollectionEventName() {
     }
 
-    public Label(List<Content> contentList) {
+    public CollectionEventName(List<Content> contentList) {
         this.contentList = contentList;
     }
-
-    // Getters and setters
 }

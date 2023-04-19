@@ -7,11 +7,11 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.util.List;
 
-@XmlRootElement(name = "Label")
+@XmlRootElement(name = "r:Description")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Description {
 
-    @XmlElement(name = "Content")
+    @XmlElement(name = "r:Content")
     private List<Content> contentList;
 
     public Description() {

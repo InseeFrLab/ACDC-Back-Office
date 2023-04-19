@@ -29,6 +29,7 @@ class DataCollectionObjectDeserializer extends JsonDeserializer<DataCollectionOb
         JsonNode node = parser.getCodec().readTree(parser);
         log.info("Node: " + node);
         String id = node.get("id").asText();
+        String urn = "urn:ddi:fr.insee:39e00da9-c1bc-4019-9672-0dbfa0d0c73e:1";
         Map<String,String> labelMap = mapper.convertValue(node.get("label"), new TypeReference<Map<String, String>>() {});
 
         List<Content> labelContentList = labelMap.entrySet().stream()
@@ -51,14 +52,28 @@ class DataCollectionObjectDeserializer extends JsonDeserializer<DataCollectionOb
         if (collectionEventsNode.isArray()) {
             for (JsonNode collectionEventNode : collectionEventsNode) {
                 UUID eventId = UUID.fromString(collectionEventNode.get("id").asText());
-                Map<String, String> collectionEventName = mapper.convertValue(collectionEventNode.get("collectionEventName"), new TypeReference<Map<String, String>>() {
+                Map<String, String> collectionEventNameMap = mapper.convertValue(collectionEventNode.get("collectionEventName"), new TypeReference<Map<String, String>>() {
                 });
-                Map<String, String> eventLabel = mapper.convertValue(collectionEventNode.get("label"), new TypeReference<Map<String, String>>() {
+                List<Content> collectionEventNameContentList = collectionEventNameMap.entrySet().stream()
+                        .map(entry -> new Content(entry.getValue(), entry.getKey()))
+                        .collect(Collectors.toList());
+                CollectionEventName collectionEventName = new CollectionEventName(collectionEventNameContentList);
+
+                Map<String, String> eventLabelMap = mapper.convertValue(collectionEventNode.get("label"), new TypeReference<Map<String, String>>() {
                 });
+                List<Content> eventLabelContentList = eventLabelMap.entrySet().stream()
+                        .map(entry -> new Content(entry.getValue(), entry.getKey()))
+                        .collect(Collectors.toList());
+                Label eventLabel = new Label(eventLabelContentList);
                 String eventAgency = collectionEventNode.get("agency").asText();
                 int eventVersion = collectionEventNode.get("version").asInt();
-                Map<String, String> eventDescription = mapper.convertValue(collectionEventNode.get("description"), new TypeReference<Map<String, String>>() {
+                Map<String, String> eventDescriptionMap = mapper.convertValue(collectionEventNode.get("description"), new TypeReference<Map<String, String>>() {
                 });
+                List<Content> eventDescriptionContentList = eventDescriptionMap.entrySet().stream()
+                        .map(entry -> new Content(entry.getValue(), entry.getKey()))
+                        .collect(Collectors.toList());
+
+                Description eventDescription = new Description(eventDescriptionContentList);
                 DataCollectionDate dataCollectionDate = mapper.convertValue(collectionEventNode.get("dataCollectionDate"), DataCollectionDate.class);
                 List<TypeOfModeOfCollection> typeOfModeOfCollection = mapper.convertValue(collectionEventNode.get("typeOfModeOfCollection"), new TypeReference<List<TypeOfModeOfCollection>>() {
                 });
@@ -66,14 +81,14 @@ class DataCollectionObjectDeserializer extends JsonDeserializer<DataCollectionOb
                 List<UserAttributePair> userAttributePairCollection = mapper.convertValue(collectionEventNode.get("userAttributePair"), new TypeReference<List<UserAttributePair>>() {
                 });
 
-                CollectionEventObject collectionEvent = new CollectionEventObject(eventId, eventAgency, eventVersion, collectionEventName, eventLabel, eventDescription, dataCollectionDate, typeOfModeOfCollection, instrumentReference, userAttributePairCollection);
+                CollectionEventObject collectionEvent = new CollectionEventObject(eventId, urn, eventAgency, eventVersion, collectionEventName, eventLabel, eventDescription, dataCollectionDate, typeOfModeOfCollection, instrumentReference, userAttributePairCollection);
                 collectionEvents.add(collectionEvent);
             }
         }
         JsonNode userAttributePairsNode = node.get("userAttributePair");
         List<UserAttributePair> userAttributePair = mapper.convertValue(userAttributePairsNode, new TypeReference<List<UserAttributePair>>() {
         });
-        DataCollectionObject response = new DataCollectionObject(id, label, agency, version, description, versionDate, collectionEvents, userAttributePair);
+        DataCollectionObject response = new DataCollectionObject(id, label, agency, version, description, versionDate, collectionEvents, userAttributePair, urn);
         return response;
     }
 }
