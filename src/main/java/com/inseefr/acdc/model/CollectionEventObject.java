@@ -2,6 +2,7 @@ package com.inseefr.acdc.model;
 
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlElement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-@Getter
+
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,31 +25,41 @@ public class CollectionEventObject {
     @GeneratedValue
     @UuidGenerator
     @Column(name = "id", nullable = false, updatable = false)
+    @XmlElement(name="r:ID")
     private UUID id;
+    @XmlElement(name="r:Agency")
     private String agency;
+    @XmlElement(name="r:Version")
     private int version;
 
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
+    @XmlElement(name="d:CollectionEventName")
     private Map<String,String> collectionEventName;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
+    @XmlElement(name="d:Label")
     private Map<String,String> label;
 
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
+    @XmlElement(name="d:Description")
     private Map<String,String> description;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
+    @XmlElement(name="d:DataCollectionDate")
     private DataCollectionDate dataCollectionDate;
     @OneToMany(cascade = CascadeType.ALL)
+    @XmlElement(name="d:ModeOfCollection")
     private List<TypeOfModeOfCollection> typeOfModeOfCollection;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
+    @XmlElement(name="d:InstrumentReference")
     private InstrumentReference instrumentReference;
 
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
+    @XmlElement(name="d:UserAttributePair")
     private List<UserAttributePair> userAttributePair;
 
     public CollectionEventObject(String agency, int version, Map<String,String> label, DataCollectionDate dataCollectionDate, List<TypeOfModeOfCollection> typeOfModeOfCollection, InstrumentReference instrumentReference, List<UserAttributePair> userAttributePair){

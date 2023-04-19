@@ -40,51 +40,52 @@ import java.util.UUID;
 @Entity
 @Table(name = "data_collection_object")
 @JsonDeserialize(using = DataCollectionObjectDeserializer.class)
-@XmlRootElement
+@XmlRootElement(name = "d:DataCollection isUniversallyUnique=\"true\"")
 public class DataCollectionObject {
     @Id
     @GeneratedValue
     @UuidGenerator
     @Column(name = "id", nullable = false, updatable = false)
+    @XmlElement(name="r:ID")
     private UUID id;
-    @XmlElement
+    @XmlElement(name="r:Agency")
     private String agency;
 
-    @XmlElement
+    @XmlElement(name="r:Version")
     private int version;
 
     @XmlElement
     private String versionDate;
 
-    @XmlElement
+    @XmlElement(name="r:Label")
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
-    private Map<String,String> label;
+    private Label label;
 
-    @XmlElement
+    @XmlElement(name="r:Description")
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
-    private Map<String,String> description;
+    private Description description;
 
     @XmlElementWrapper
-    @XmlElement(name = "collectionEvent")
+    @XmlElement(name = "d:CollectionEvent isUniversallyUnique=\"true\"")
     @OneToMany
     private ArrayList<CollectionEventObject> collectionEvents;
 
     @XmlElementWrapper
-    @XmlElement(name = "userAttributePair")
+    @XmlElement(name = "r:UserAttributePair")
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     private ArrayList<UserAttributePair> userAttributePair;
 
-    public DataCollectionObject(String agency, int version, Map<String,String> label, Map<String,String> description) {
+    public DataCollectionObject(String agency, int version, Label label, Description description) {
         this.agency = agency;
         this.version = version;
         this.label = label;
         this.description = description;
     }
 
-    public DataCollectionObject(String agency, int version, Map<String,String> label, Map<String,String>description, ArrayList<CollectionEventObject> collectionEvents, ArrayList<UserAttributePair> userAttributePair) {
+    public DataCollectionObject(String agency, int version, Label label, Description description, ArrayList<CollectionEventObject> collectionEvents, ArrayList<UserAttributePair> userAttributePair) {
         this.agency = agency;
         this.version = version;
         this.label = label;
@@ -98,7 +99,7 @@ public class DataCollectionObject {
         objectMapper.readerForUpdating(this).readValue(json);
     }
 
-    public DataCollectionObject(String id, Map<String,String> label, String agency, int version, Map<String,String> description, String versionDate, List<CollectionEventObject> collectionEvents, List<UserAttributePair> userAttributePair) {
+    public DataCollectionObject(String id, Label label, String agency, int version, Description description, String versionDate, List<CollectionEventObject> collectionEvents, List<UserAttributePair> userAttributePair) {
         this.id = UUID.fromString(id);
         this.agency = agency;
         this.version = version;

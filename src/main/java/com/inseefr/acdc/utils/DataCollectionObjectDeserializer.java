@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 public
@@ -28,10 +29,22 @@ class DataCollectionObjectDeserializer extends JsonDeserializer<DataCollectionOb
         JsonNode node = parser.getCodec().readTree(parser);
         log.info("Node: " + node);
         String id = node.get("id").asText();
-        Map<String,String> label = mapper.convertValue(node.get("label"), new TypeReference<Map<String, String>>() {});
+        Map<String,String> labelMap = mapper.convertValue(node.get("label"), new TypeReference<Map<String, String>>() {});
+
+        List<Content> labelContentList = labelMap.entrySet().stream()
+                .map(entry -> new Content(entry.getValue(), entry.getKey()))
+                .collect(Collectors.toList());
+
+        Label label = new Label(labelContentList);
         String agency = node.get("agency").asText();
         int version = node.get("version").asInt();
-        Map<String,String> description = mapper.convertValue(node.get("description"), new TypeReference<Map<String, String>>() {});
+        Map<String,String> descriptionMap = mapper.convertValue(node.get("description"), new TypeReference<Map<String, String>>() {});
+
+        List<Content> descriptionContentList = descriptionMap.entrySet().stream()
+                .map(entry -> new Content(entry.getValue(), entry.getKey()))
+                .collect(Collectors.toList());
+
+        Description description = new Description(descriptionContentList);
         String versionDate = node.get("versionDate").asText();
         List<CollectionEventObject> collectionEvents = new ArrayList<>();
         JsonNode collectionEventsNode = node.get("collectionEvents");
