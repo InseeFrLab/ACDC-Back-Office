@@ -12,6 +12,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,56 +36,53 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "data_collection_object")
 @JsonDeserialize(using = DataCollectionObjectDeserializer.class)
+@XmlRootElement
 public class DataCollectionObject {
     @Id
     @GeneratedValue
     @UuidGenerator
     @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
+    @XmlElement
     private String agency;
+
+    @XmlElement
     private int version;
+
+    @XmlElement
     private String versionDate;
+
+    @XmlElement
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     private Map<String,String> label;
+
+    @XmlElement
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     private Map<String,String> description;
+
+    @XmlElementWrapper
+    @XmlElement(name = "collectionEvent")
     @OneToMany
     private ArrayList<CollectionEventObject> collectionEvents;
 
+    @XmlElementWrapper
+    @XmlElement(name = "userAttributePair")
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     private ArrayList<UserAttributePair> userAttributePair;
-    /**
-     * Instantiates a new Data collection.
-     *
-     * @param agency      the agency
-     * @param version     the version
-     * @param label       the label
-     * @param description the description
-     */
-    public DataCollectionObject(String agency, int version, Map<String,String>  label, Map<String,String> description) {
+
+    public DataCollectionObject(String agency, int version, Map<String,String> label, Map<String,String> description) {
         this.agency = agency;
         this.version = version;
         this.label = label;
         this.description = description;
     }
 
-    /**
-     * Instantiates a new Data collection.
-     *
-     * @param agency            the agency
-     * @param version           the version
-     * @param label             the label
-     * @param description       the description
-     * @param collectionEvents  the collection events
-     * @param userAttributePair the user attribute pair
-     */
     public DataCollectionObject(String agency, int version, Map<String,String> label, Map<String,String>description, ArrayList<CollectionEventObject> collectionEvents, ArrayList<UserAttributePair> userAttributePair) {
         this.agency = agency;
         this.version = version;
@@ -92,13 +92,16 @@ public class DataCollectionObject {
         this.userAttributePair = userAttributePair;
     }
 
-
     public DataCollectionObject(String json) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.readerForUpdating(this).readValue(json);
     }
 
     public DataCollectionObject(String id, String label, String agency, int version, String description, String versionDate, List<CollectionEventObject> collectionEvents) {
+    }
+
+    public DataCollectionObject() {
+
     }
 }
 
