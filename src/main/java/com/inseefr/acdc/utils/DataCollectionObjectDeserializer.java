@@ -1,0 +1,66 @@
+package com.inseefr.acdc.utils;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.inseefr.acdc.model.*;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+@Slf4j
+public
+class DataCollectionObjectDeserializer extends JsonDeserializer<DataCollectionObject> {
+
+    @Override
+    public DataCollectionObject deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        JsonNode node = parser.getCodec().readTree(parser);
+        log.info("Node: " + node);
+        String id = node.get("id").asText();
+        Map<String,String> label = mapper.convertValue(node.get("label"), new TypeReference<Map<String, String>>() {});
+        String agency = node.get("agency").asText();
+        int version = node.get("version").asInt();
+        Map<String,String> description = mapper.convertValue(node.get("description"), new TypeReference<Map<String, String>>() {});
+        String versionDate = node.get("versionDate").asText();
+        List<CollectionEventObject> collectionEvents = new ArrayList<>();
+        JsonNode collectionEventsNode = node.get("collectionEvents");
+        if (collectionEventsNode.isArray()) {
+            for (JsonNode collectionEventNode : collectionEventsNode) {
+                UUID eventId = UUID.fromString(collectionEventNode.get("id").asText());
+                Map<String, String> collectionEventName = mapper.convertValue(collectionEventNode.get("collectionEventName"), new TypeReference<Map<String, String>>() {
+                });
+                Map<String, String> eventLabel = mapper.convertValue(collectionEventNode.get("label"), new TypeReference<Map<String, String>>() {
+                });
+                String eventAgency = collectionEventNode.get("agency").asText();
+                int eventVersion = collectionEventNode.get("version").asInt();
+                Map<String, String> eventDescription = mapper.convertValue(collectionEventNode.get("description"), new TypeReference<Map<String, String>>() {
+                });
+                DataCollectionDate dataCollectionDate = mapper.convertValue(collectionEventNode.get("dataCollectionDate"), DataCollectionDate.class);
+                List<TypeOfModeOfCollection> typeOfModeOfCollection = mapper.convertValue(collectionEventNode.get("typeOfModeOfCollection"), new TypeReference<List<TypeOfModeOfCollection>>() {
+                });
+                InstrumentReference instrumentReference = mapper.convertValue(collectionEventNode.get("instrumentReference"), InstrumentReference.class);
+                List<UserAttributePair> userAttributePairCollection = mapper.convertValue(collectionEventNode.get("userAttributePair"), new TypeReference<List<UserAttributePair>>() {
+                });
+
+                CollectionEventObject collectionEvent = new CollectionEventObject(eventId, eventAgency, eventVersion, collectionEventName, eventLabel, eventDescription, dataCollectionDate, typeOfModeOfCollection, instrumentReference, userAttributePairCollection);
+                collectionEvents.add(collectionEvent);
+            }
+        }
+        JsonNode userAttributePairsNode = node.get("userAttributePair");
+        List<UserAttributePair> userAttributePair = mapper.convertValue(userAttributePairsNode, new TypeReference<List<UserAttributePair>>() {
+        });
+        DataCollectionObject response = new DataCollectionObject(id, label, agency, version, description, versionDate, collectionEvents, userAttributePair);
+        return response;
+    }
+}

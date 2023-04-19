@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.inseefr.acdc.model.CollectionEventObject;
 import com.inseefr.acdc.model.DataCollectionObject;
+import com.inseefr.acdc.model.UserAttributePair;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 import lombok.extern.slf4j.Slf4j;
@@ -49,11 +51,12 @@ public class DDIService {
             }
 
             DataCollectionObject dataCollection = objectMapper.treeToValue(dataCollectionNode, DataCollectionObject.class);
+
             log.info("DataCollectionObject: " + dataCollection.toString());
 
 
             // Convert the Java object to XML using JAXB
-            JAXBContext jaxbContext = JAXBContext.newInstance(DataCollectionObject.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(DataCollectionObject.class, CollectionEventObject.class, UserAttributePair.class);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
