@@ -104,7 +104,7 @@ public class ExternalService {
             item.put("Identifier", identifier);
             item.put("Item", ddiContent); // pass the DDI-formatted XML string to the "Item" field
             item.put("VersionDate", "2023-01-23T11:53:37.1700000Z");
-            item.put("VersionResponsibility", "AD\\\\idep"); // pass someUser as a command line argument
+            item.put("VersionResponsibility", "AD\\\\ylzbwc"); // pass someUser as a command line argument
             item.put("IsPublished", false);
             item.put("IsDeprecated", false);
             item.put("IsProvisional", false);
