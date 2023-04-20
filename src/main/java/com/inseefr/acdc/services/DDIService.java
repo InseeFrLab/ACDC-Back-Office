@@ -23,37 +23,8 @@ import java.time.format.DateTimeFormatterBuilder;
 public class DDIService {
     @Autowired
     private DataCollectionService dataCollectionService;
-    public String JsonToDDIConverter(String dataCollectionID) {
+    public String JsonToDDIConverter(DataCollectionObject dataCollection) {
         try {
-            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                    .appendPattern("yyyy-MM-dd'T'HH:mm:ss")
-                    .appendOffset("+HH:MM", "+00:00")
-                    .toFormatter();
-
-            ObjectMapper objectMapper = new ObjectMapper()
-                    .registerModule(new JavaTimeModule())
-                    .registerModule(new SimpleModule()
-                            .addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE));
-
-            JavaTimeModule javaTimeModule = new JavaTimeModule();
-            javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(formatter));
-            objectMapper.registerModule(javaTimeModule);
-
-
-            String jsonData = objectMapper.writeValueAsString(dataCollectionService.getDataCollectionById(dataCollectionID).getJson());
-            log.info("DataCollection JSON: " + jsonData);
-
-            JsonNode rootNode = objectMapper.readTree(jsonData);
-            JsonNode dataCollectionNode = rootNode.get("json");
-            if (dataCollectionNode == null) {
-                log.error("DataCollection JSON does not contain a 'dataCollection' field");
-                return "";
-            }
-
-            DataCollectionObject dataCollection = objectMapper.treeToValue(dataCollectionNode, DataCollectionObject.class);
-
-            log.info("DataCollectionObject: " + dataCollection.toString());
-
 
             // Convert the Java object to XML using JAXB
             JAXBContext jaxbContext = JAXBContext.newInstance(DataCollectionObject.class, CollectionEventObject.class, UserAttributePair.class);

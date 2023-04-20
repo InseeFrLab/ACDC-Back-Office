@@ -1,5 +1,12 @@
 package com.inseefr.acdc.services;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.inseefr.acdc.domain.DataCollection;
+import com.inseefr.acdc.model.DataCollectionObject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +19,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
 
 @Service
@@ -25,6 +35,9 @@ public class ExternalService {
 
     @Autowired
     private DDIService ddiService;
+
+    @Autowired
+    private DataCollectionService dataCollectionService;
 
     public String getQuestionnaires(){
 
@@ -93,11 +106,38 @@ public class ExternalService {
     public String convertAndSendToColectica(String dataCollectionID){
 
         try {
+            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                    .appendPattern("yyyy-MM-dd'T'HH:mm:ss")
+                    .appendOffset("+HH:MM", "+00:00")
+                    .toFormatter();
 
-            String ddiContent = ddiService.JsonToDDIConverter(dataCollectionID); // convert JSON to DDI format using the JsonToDDIConverter function
+            ObjectMapper objectMapper = new ObjectMapper()
+                    .registerModule(new JavaTimeModule())
+                    .registerModule(new SimpleModule()
+                            .addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE));
+
+            JavaTimeModule javaTimeModule = new JavaTimeModule();
+            javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(formatter));
+            objectMapper.registerModule(javaTimeModule);
+
+
+            String jsonData = objectMapper.writeValueAsString(dataCollectionService.getDataCollectionById(dataCollectionID).getJson());
+            log.info("DataCollection JSON: " + jsonData);
+
+            JsonNode rootNode = objectMapper.readTree(jsonData);
+            JsonNode dataCollectionNode = rootNode.get("json");
+            if (dataCollectionNode == null) {
+                log.error("DataCollection JSON does not contain a 'dataCollection' field");
+                return "";
+            }
+
+            DataCollectionObject dataCollection = objectMapper.treeToValue(dataCollectionNode, DataCollectionObject.class);
+
+            log.info("DataCollectionObject: " + dataCollection.toString());
+            String ddiContent = ddiService.JsonToDDIConverter(dataCollection); // convert JSON to DDI format using the JsonToDDIConverter function
 
             UUID uuid = UUID.randomUUID();
-            String identifier = uuid.toString();
+            String identifier = rootNode.get("id").asText();
             Map<String, Object> item = new LinkedHashMap<>();
             item.put("ItemType", "c5084916-9936-47a9-a523-93be9fd816d8");
             item.put("AgencyId", "fr.insee");
