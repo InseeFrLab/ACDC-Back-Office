@@ -11,7 +11,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Label {
 
-    @XmlElement(name = "r:Content", namespace = "urn:oecd:ties:stf:v5")
+    @XmlElement(name = "r:Content")
     private List<Content> contentList;
 
     public Label() {

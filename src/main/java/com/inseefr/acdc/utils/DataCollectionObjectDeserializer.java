@@ -27,7 +27,6 @@ class DataCollectionObjectDeserializer extends JsonDeserializer<DataCollectionOb
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
         JsonNode node = parser.getCodec().readTree(parser);
-        log.info("Node: " + node);
         String id = node.get("id").asText();
         String urn = "urn:ddi:fr.insee:39e00da9-c1bc-4019-9672-0dbfa0d0c73e:1";
         Map<String,String> labelMap = mapper.convertValue(node.get("label"), new TypeReference<Map<String, String>>() {});

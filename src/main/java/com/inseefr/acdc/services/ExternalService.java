@@ -99,12 +99,12 @@ public class ExternalService {
             String identifier = uuid.toString();
             Map<String, Object> item = new LinkedHashMap<>();
             item.put("ItemType", "c5084916-9936-47a9-a523-93be9fd816d8");
-            item.put("AgencyId", "someAgency");
+            item.put("AgencyId", "fr.insee");
             item.put("Version", 1);
             item.put("Identifier", identifier);
             item.put("Item", ddiContent); // pass the DDI-formatted XML string to the "Item" field
             item.put("VersionDate", "2023-01-23T11:53:37.1700000Z");
-            item.put("VersionResponsibility", "someUser"); // pass someUser as a command line argument
+            item.put("VersionResponsibility", "AD\\\\idep"); // pass someUser as a command line argument
             item.put("IsPublished", false);
             item.put("IsDeprecated", false);
             item.put("IsProvisional", false);
@@ -121,6 +121,6 @@ public class ExternalService {
             return json.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            return "";
+            throw new RuntimeException(e);
         }}
 }

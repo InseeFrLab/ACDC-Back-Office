@@ -59,10 +59,15 @@ public class DDIService {
             JAXBContext jaxbContext = JAXBContext.newInstance(DataCollectionObject.class, CollectionEventObject.class, UserAttributePair.class);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true); // Set JAXB_FRAGMENT property to true
 
             StringWriter sw = new StringWriter();
             marshaller.marshal(dataCollection, sw);
-            String xmlData = sw.toString();
+            String xmlData = "<Fragment xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
+                    + "    xsi:schemaLocation=\"ddi:instance:3_3 https://ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd\"\n"
+                    + "    xmlns=\"ddi:instance:3_3\" xmlns:r=\"ddi:reusable:3_3\" xmlns:d=\"ddi:datacollection:3_3\">\n"
+                    + sw.toString()
+                    + "\n</Fragment>";
 
             // Do something with the DDI-formatted XML string
             log.info("DDI-formatted XML string: " + xmlData);

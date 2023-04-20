@@ -13,6 +13,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.inseefr.acdc.utils.DataCollectionObjectDeserializer;
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -40,7 +41,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "data_collection_object")
 @JsonDeserialize(using = DataCollectionObjectDeserializer.class)
-@XmlRootElement(name = "d:DataCollection isUniversallyUnique=\"true\"")
+@XmlRootElement(name = "d:DataCollection")
 public class DataCollectionObject {
     @Id
     @GeneratedValue
@@ -57,7 +58,7 @@ public class DataCollectionObject {
     @XmlElement(name="r:Version")
     private int version;
 
-    @XmlElement
+    @XmlAttribute(name="versionDate")
     private String versionDate;
 
     @XmlElement(name="r:Label")
@@ -70,12 +71,11 @@ public class DataCollectionObject {
     @Column(columnDefinition = "jsonb")
     private Description description;
 
-    @XmlElementWrapper
-    @XmlElement(name = "d:CollectionEvent isUniversallyUnique=\"true\"")
+    @XmlElement(name = "d:CollectionEvent")
     @OneToMany
     private ArrayList<CollectionEventObject> collectionEvents;
 
-    @XmlElementWrapper
+
     @XmlElement(name = "r:UserAttributePair")
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
