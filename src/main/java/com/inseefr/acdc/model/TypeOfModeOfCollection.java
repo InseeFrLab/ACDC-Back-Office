@@ -1,6 +1,7 @@
 package com.inseefr.acdc.model;
 
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,9 +26,11 @@ public class TypeOfModeOfCollection {
     private UUID id;
     @XmlElement(name = "r:Agency")
     private String agency;
-@XmlElement(name = "r:Version")
+    @XmlElement(name = "r:Version")
     private int version;
     //TODO: enum
     @XmlElement(name = "r:TypeOfModeOfCollection")
     private String type;
+    @XmlAttribute(name="isUniversallyUnique")
+    private final boolean isUniversallyUnique = true;
 }

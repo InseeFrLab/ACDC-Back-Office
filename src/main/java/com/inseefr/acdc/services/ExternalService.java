@@ -1,6 +1,7 @@
 package com.inseefr.acdc.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
@@ -110,13 +111,9 @@ public class ExternalService {
             item.put("IsProvisional", false);
             item.put("ItemFormat", "DC337820-AF3A-4C0B-82F9-CF02535CDE83");
 
-            List<Map<String, Object>> items = new ArrayList<>();
-            items.add(item);
+            JSONObject json = new JSONObject();
+            json.put("Items", new JSONArray().put(item));
 
-            Map<String, Object> json = new LinkedHashMap<>();
-            json.put("Items", items);
-
-            log.info("JSON: " + json.toString());
 
             return json.toString();
         } catch (Exception e) {

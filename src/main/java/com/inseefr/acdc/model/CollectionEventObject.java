@@ -2,6 +2,7 @@ package com.inseefr.acdc.model;
 
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -64,6 +65,9 @@ public class CollectionEventObject {
     @Column(columnDefinition = "jsonb")
     @XmlElement(name="d:UserAttributePair")
     private List<UserAttributePair> userAttributePair;
+
+    @XmlAttribute(name="isUniversallyUnique")
+    private final boolean isUniversallyUnique = true;
 
     public CollectionEventObject(String id, String agency, int version, Label label, DataCollectionDate dataCollectionDate, List<TypeOfModeOfCollection> typeOfModeOfCollection, InstrumentReference instrumentReference, List<UserAttributePair> userAttributePair, String urn){
         this.id = UUID.fromString(id);

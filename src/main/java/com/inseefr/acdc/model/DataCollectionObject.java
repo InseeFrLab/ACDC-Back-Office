@@ -61,6 +61,9 @@ public class DataCollectionObject {
     @XmlAttribute(name="versionDate")
     private String versionDate;
 
+    @XmlAttribute(name="isUniversallyUnique")
+    private final boolean isUniversallyUnique = true;
+
     @XmlElement(name="r:Label")
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")

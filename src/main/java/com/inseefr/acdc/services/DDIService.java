@@ -69,13 +69,10 @@ public class DDIService {
                     + sw.toString()
                     + "\n</Fragment>";
 
-            // Do something with the DDI-formatted XML string
-            log.info("DDI-formatted XML string: " + xmlData);
             return xmlData;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return "";
     }
 }
