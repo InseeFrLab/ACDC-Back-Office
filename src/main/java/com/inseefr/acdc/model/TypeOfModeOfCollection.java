@@ -24,6 +24,9 @@ public class TypeOfModeOfCollection {
     @XmlElement(name = "r:ID")
     @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
+
+    @XmlElement(name = "r:URN")
+    private final String urn = "urn:ddi:fr.insee:"+id+":1";
     @XmlElement(name = "r:Agency")
     private String agency;
     @XmlElement(name = "r:Version")

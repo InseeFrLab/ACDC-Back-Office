@@ -28,7 +28,7 @@ class DataCollectionObjectDeserializer extends JsonDeserializer<DataCollectionOb
         mapper.registerModule(new JavaTimeModule());
         JsonNode node = parser.getCodec().readTree(parser);
         String id = node.get("id").asText();
-        String urn = "urn:ddi:fr.insee:39e00da9-c1bc-4019-9672-0dbfa0d0c73e:1";
+        String urn = "urn:ddi:fr.insee:"+id+":1";
         Map<String,String> labelMap = mapper.convertValue(node.get("label"), new TypeReference<Map<String, String>>() {});
 
         List<Content> labelContentList = labelMap.entrySet().stream()
@@ -51,6 +51,7 @@ class DataCollectionObjectDeserializer extends JsonDeserializer<DataCollectionOb
         if (collectionEventsNode.isArray()) {
             for (JsonNode collectionEventNode : collectionEventsNode) {
                 UUID eventId = UUID.fromString(collectionEventNode.get("id").asText());
+                String urnEvent = "urn:ddi:fr.insee:"+eventId+":1";
                 Map<String, String> collectionEventNameMap = mapper.convertValue(collectionEventNode.get("collectionEventName"), new TypeReference<Map<String, String>>() {
                 });
                 List<Content> collectionEventNameContentList = collectionEventNameMap.entrySet().stream()
@@ -80,7 +81,7 @@ class DataCollectionObjectDeserializer extends JsonDeserializer<DataCollectionOb
                 List<UserAttributePair> userAttributePairCollection = mapper.convertValue(collectionEventNode.get("userAttributePair"), new TypeReference<List<UserAttributePair>>() {
                 });
 
-                CollectionEventObject collectionEvent = new CollectionEventObject(eventId, urn, eventAgency, eventVersion, collectionEventName, eventLabel, eventDescription, dataCollectionDate, typeOfModeOfCollection, instrumentReference, userAttributePairCollection);
+                CollectionEventObject collectionEvent = new CollectionEventObject(eventId, urnEvent, eventAgency, eventVersion, collectionEventName, eventLabel, eventDescription, dataCollectionDate, typeOfModeOfCollection, instrumentReference, userAttributePairCollection);
                 collectionEvents.add(collectionEvent);
             }
         }
