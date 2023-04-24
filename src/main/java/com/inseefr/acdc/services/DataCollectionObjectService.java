@@ -28,7 +28,7 @@ public class DataCollectionObjectService {
     public DataCollectionObject saveDataCollection(DataCollectionObject dataCollectionObject) {
         LocalDateTime lt
                 = LocalDateTime.now();
-        dataCollectionObject.setVersionDate(lt);
+        dataCollectionObject.setVersionDate(lt.toString());
         return dataCollectionObjectRepository.save(dataCollectionObject);
     }
 
@@ -41,9 +41,6 @@ public class DataCollectionObjectService {
     }
 
     public DataCollectionObject updateDataCollection(DataCollectionObject dataCollectionObject) {
-        LocalDateTime lt
-                = LocalDateTime.now();
-        dataCollectionObject.setVersionDate(lt);
         return dataCollectionObjectRepository.saveAndFlush(dataCollectionObject);
     }
 }

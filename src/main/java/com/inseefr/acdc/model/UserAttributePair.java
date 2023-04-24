@@ -1,41 +1,31 @@
 package com.inseefr.acdc.model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.xml.bind.annotation.XmlElement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
+import java.util.ArrayList;
 
-@Getter
+
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserAttributePair implements Serializable {
+    @XmlElement(name = "r:AttributeKey")
     private String attributeKey;
-    private List<UserAttributePairValue> attributeValue;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @XmlElement(name = "r:AttributeValue")
+    private String attributeValue;
 
     @Override
     public String toString() {
         return "UserAttributePair{" +
-                "attributeKey='" + attributeKey + '\'' +
-                ", attributeValue=" + attributeValue.toString() +
+                "attributeName='" + attributeKey + '\'' +
+                ", attributeValue='" + attributeValue + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserAttributePair that = (UserAttributePair) o;
-        return Objects.equals(attributeKey, that.attributeKey) && Objects.equals(attributeValue, that.attributeValue);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(attributeKey, attributeValue);
     }
 }

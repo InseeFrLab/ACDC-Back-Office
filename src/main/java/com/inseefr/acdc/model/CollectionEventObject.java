@@ -2,6 +2,8 @@ package com.inseefr.acdc.model;
 
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-@Getter
+
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,29 +26,51 @@ public class CollectionEventObject {
     @GeneratedValue
     @UuidGenerator
     @Column(name = "id", nullable = false, updatable = false)
+    @XmlElement(name="r:ID")
     private UUID id;
+
+    @XmlElement(name="r:URN")
+    private String urn;
+    @XmlElement(name="r:Agency")
     private String agency;
+    @XmlElement(name="r:Version")
     private int version;
 
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
-    private List<Map<String,String>> collectionEventName;
+    @XmlElement(name="d:CollectionEventName")
+    private CollectionEventName collectionEventName;
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
-    private List<Map<String,String>> label;
+    @XmlElement(name="d:Label")
+    private Label label;
+
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
+    @XmlElement(name="d:Description")
+    private Description description;
+    @Type(JsonType.class)
+    @Column(columnDefinition = "jsonb")
+    @XmlElement(name="d:DataCollectionDate")
     private DataCollectionDate dataCollectionDate;
     @OneToMany(cascade = CascadeType.ALL)
+    @XmlElement(name="d:ModeOfCollection")
     private List<TypeOfModeOfCollection> typeOfModeOfCollection;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<InstrumentReference> instrumentReference;
+    @Type(JsonType.class)
+    @Column(columnDefinition = "jsonb")
+    @XmlElement(name="d:InstrumentReference")
+    private InstrumentReference instrumentReference;
 
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
-    private List<CollectionUserAttributePair> userAttributePair;
+    @XmlElement(name="d:UserAttributePair")
+    private List<UserAttributePair> userAttributePair;
 
-    public CollectionEventObject(String agency, int version, List<Map<String, String>> label, DataCollectionDate dataCollectionDate, List<TypeOfModeOfCollection> typeOfModeOfCollection, List<InstrumentReference> instrumentReference, List<CollectionUserAttributePair> userAttributePair){
+    @XmlAttribute(name="isUniversallyUnique")
+    private final boolean isUniversallyUnique = true;
+
+    public CollectionEventObject(String id, String agency, int version, Label label, DataCollectionDate dataCollectionDate, List<TypeOfModeOfCollection> typeOfModeOfCollection, InstrumentReference instrumentReference, List<UserAttributePair> userAttributePair, String urn){
+        this.id = UUID.fromString(id);
         this.agency = agency;
         this.version = version;
         this.label = label;
@@ -54,10 +78,11 @@ public class CollectionEventObject {
         this.typeOfModeOfCollection = typeOfModeOfCollection;
         this.instrumentReference = instrumentReference;
         this.userAttributePair = userAttributePair;
+        this.urn = urn;
     }
 
-    public CollectionEventObject(String agency, int version) {
-
+    public CollectionEventObject(String id, String agency, int version) {
+        this.id = UUID.fromString(id);
         this.agency = agency;
         this.version = version;
     }
