@@ -131,7 +131,7 @@ public class ExternalService {
 
             DataCollectionObject dataCollection = new DataCollectionObject();
             try {
-                dataCollection = objectMapper.treeToValue(dataCollectionNode, DataCollectionObject.class);
+                dataCollection = objectMapper.treeToValue(rootNode, DataCollectionObject.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
