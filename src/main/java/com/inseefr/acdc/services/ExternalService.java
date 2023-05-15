@@ -64,7 +64,7 @@ public class ExternalService {
 
     public String getSeries(){
         HttpClient client = HttpClient.newHttpClient();
-        String url = magmaUri + "operations/series";
+        String url = magmaUri + "operations/series?survey=true";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .build();
