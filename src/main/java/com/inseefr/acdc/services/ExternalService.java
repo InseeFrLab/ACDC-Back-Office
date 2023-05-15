@@ -124,8 +124,8 @@ public class ExternalService {
             String jsonData = objectMapper.writeValueAsString(dataCollectionService.getDataCollectionById(dataCollectionID).getJson());
             log.info("DataCollection JSON: " + jsonData);
 
-            JsonNode rootNode = objectMapper.readTree(jsonData);
-            JsonNode dataCollectionNode = rootNode.get("json");
+            //JsonNode rootNode = objectMapper.readTree(jsonData);
+            JsonNode dataCollectionNode = objectMapper.readTree(jsonData);
             if (dataCollectionNode == null) {
                 log.error("DataCollection JSON does not contain a 'dataCollection' field");
                 return "";
@@ -137,7 +137,7 @@ public class ExternalService {
             String ddiContent = ddiService.JsonToDDIConverter(dataCollection); // convert JSON to DDI format using the JsonToDDIConverter function
 
             UUID uuid = UUID.randomUUID();
-            String identifier = rootNode.get("id").asText();
+            String identifier = dataCollectionNode.get("id").asText();
             Map<String, Object> item = new LinkedHashMap<>();
             item.put("ItemType", "c5084916-9936-47a9-a523-93be9fd816d8");
             item.put("AgencyId", "fr.insee");
