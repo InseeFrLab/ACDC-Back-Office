@@ -3,6 +3,7 @@ package com.inseefr.acdc.services;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.inseefr.acdc.domain.DataCollection;
@@ -122,22 +123,24 @@ public class ExternalService {
 
 
             String jsonData = objectMapper.writeValueAsString(dataCollectionService.getDataCollectionById(dataCollectionID).getJson());
-            log.info("DataCollection JSON: " + jsonData);
+            //log.info("DataCollection JSON: " + jsonData);
 
-            //JsonNode rootNode = objectMapper.readTree(jsonData);
-            JsonNode dataCollectionNode = objectMapper.readTree(jsonData);
-            if (dataCollectionNode == null) {
-                log.error("DataCollection JSON does not contain a 'dataCollection' field");
-                return "";
+            JsonNode rootNode = objectMapper.readTree(jsonData);
+            log.info("RootNode: " + rootNode.toString());
+            JsonNode dataCollectionNode = rootNode.get("json");
+
+            DataCollectionObject dataCollection = new DataCollectionObject();
+            try {
+                dataCollection = objectMapper.treeToValue(dataCollectionNode, DataCollectionObject.class);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            DataCollectionObject dataCollection = objectMapper.treeToValue(dataCollectionNode, DataCollectionObject.class);
 
             log.info("DataCollectionObject: " + dataCollection.toString());
             String ddiContent = ddiService.JsonToDDIConverter(dataCollection); // convert JSON to DDI format using the JsonToDDIConverter function
 
             UUID uuid = UUID.randomUUID();
-            String identifier = dataCollectionNode.get("id").asText();
+            String identifier = rootNode.get("id").asText();
             Map<String, Object> item = new LinkedHashMap<>();
             item.put("ItemType", "c5084916-9936-47a9-a523-93be9fd816d8");
             item.put("AgencyId", "fr.insee");
