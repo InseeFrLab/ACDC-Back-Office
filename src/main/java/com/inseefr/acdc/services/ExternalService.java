@@ -141,7 +141,7 @@ public class ExternalService {
 
             UUID uuid = UUID.randomUUID();
             String identifier = rootNode.get("id").asText();
-            String versionDate = dataCollectionNode.get("versionDate").asText();
+            String versionDate = rootNode.get("versionDate").asText();
             Map<String, Object> item = new LinkedHashMap<>();
             item.put("ItemType", "c5084916-9936-47a9-a523-93be9fd816d8");
             item.put("AgencyId", "fr.insee");
