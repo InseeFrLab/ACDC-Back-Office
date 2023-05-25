@@ -3,6 +3,7 @@ package com.inseefr.acdc.services;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.inseefr.acdc.domain.DataCollection;
@@ -121,29 +122,32 @@ public class ExternalService {
 
 
             String jsonData = objectMapper.writeValueAsString(dataCollectionService.getDataCollectionById(dataCollectionID).getJson());
-            log.info("DataCollection JSON: " + jsonData);
+            //log.info("DataCollection JSON: " + jsonData);
 
             JsonNode rootNode = objectMapper.readTree(jsonData);
+            log.info("RootNode: " + rootNode.toString());
             JsonNode dataCollectionNode = rootNode.get("json");
-            if (dataCollectionNode == null) {
-                log.error("DataCollection JSON does not contain a 'dataCollection' field");
-                return "";
-            }
 
-            DataCollectionObject dataCollection = objectMapper.treeToValue(dataCollectionNode, DataCollectionObject.class);
+            DataCollectionObject dataCollection = new DataCollectionObject();
+            try {
+                dataCollection = objectMapper.treeToValue(rootNode, DataCollectionObject.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             log.info("DataCollectionObject: " + dataCollection.toString());
             String ddiContent = ddiService.JsonToDDIConverter(dataCollection); // convert JSON to DDI format using the JsonToDDIConverter function
 
             UUID uuid = UUID.randomUUID();
             String identifier = rootNode.get("id").asText();
+            String versionDate = rootNode.get("versionDate").asText();
             Map<String, Object> item = new LinkedHashMap<>();
             item.put("ItemType", "c5084916-9936-47a9-a523-93be9fd816d8");
             item.put("AgencyId", "fr.insee");
             item.put("Version", 1);
             item.put("Identifier", identifier);
             item.put("Item", ddiContent); // pass the DDI-formatted XML string to the "Item" field
-            item.put("VersionDate", "2023-01-23T11:53:37.1700000Z");
+            item.put("VersionDate", versionDate);
             item.put("VersionResponsibility", "AD\\\\ylzbwc"); // pass someUser as a command line argument
             item.put("IsPublished", false);
             item.put("IsDeprecated", false);

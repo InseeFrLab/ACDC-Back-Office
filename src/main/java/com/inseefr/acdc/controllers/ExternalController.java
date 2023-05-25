@@ -1,12 +1,20 @@
 package com.inseefr.acdc.controllers;
 
 import com.inseefr.acdc.services.ExternalService;
+import com.inseefr.acdc.services.PdfService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/external")
@@ -17,6 +25,9 @@ public class ExternalController {
 
     @Autowired
     private ExternalService externalService;
+
+    @Autowired
+    private PdfService pdfService;
 
     @Operation(summary = "Retrieve questionnaires from Pogues Back Office")
     @GetMapping(value= "/pogues/questionnaire", produces = "application/json")
@@ -44,6 +55,22 @@ public class ExternalController {
     public ResponseEntity<String> publishDataCollection(@PathVariable String id) {
         log.info("Publish data collection");
         return ResponseEntity.ok(externalService.convertAndSendToColectica(id));
+    }
+
+    @Operation(summary="Generate an empty pdf file")
+    @GetMapping(value="mail/new", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> getGeneratedPdf() throws IOException {
+        pdfService.generateEmptyPdf();
+        File pdfFile = new File("src/main/resources/static/emptyPdf.pdf");
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(pdfFile));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=generatedPdf.pdf");
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(resource);
     }
 
 }
