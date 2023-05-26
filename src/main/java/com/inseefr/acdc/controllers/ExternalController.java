@@ -61,7 +61,7 @@ public class ExternalController {
     @GetMapping(value="mail/new", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> getGeneratedPdf() throws IOException {
         pdfService.generateEmptyPdf();
-        File pdfFile = new File("src/main/resources/static/emptyPdf.pdf");
+        File pdfFile = new File("static/emptyPdf.pdf");
         InputStreamResource resource = new InputStreamResource(new FileInputStream(pdfFile));
 
         HttpHeaders headers = new HttpHeaders();

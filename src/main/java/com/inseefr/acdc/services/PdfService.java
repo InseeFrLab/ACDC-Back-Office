@@ -21,11 +21,11 @@ public class PdfService {
 
     public void generateEmptyPdf() throws IOException {
         log.info("Generate empty pdf using Apache Fop");
-        File xsltFile = new File("src/main/resources/static/emptyPdf.xsl");
-        File xmlFile = new File("src/main/resources/static/emptyPdf.xml");
+        File xsltFile = new File("static/emptyPdf.xsl");
+        File xmlFile = new File("static/emptyPdf.xml");
 
         // Temp path
-        File pdfDir = new File("src/main/resources/static");
+        File pdfDir = new File("static");
         pdfDir.mkdirs();
         File pdfFile = new File(pdfDir,"emptyPdf.pdf");
 
