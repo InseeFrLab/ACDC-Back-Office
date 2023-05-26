@@ -50,4 +50,34 @@ public class PdfService {
             out.close();
         }
     }
+
+    public void generatePdfFromXmlXslt(String xmlContent, String xsltContent) throws IOException {
+        log.info("Generate pdf from xml and xsd using Apache Fop");
+        File xsltFile = new File(xsltContent);
+        File xmlFile = new File(xmlContent);
+        File pdfDir = new File("static");
+        pdfDir.mkdirs();
+        File pdfFile = new File(pdfDir,"generatedPdf.pdf");
+
+        FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
+        FOUserAgent foUserAgent = fopFactory.newFOUserAgent();
+
+        OutputStream out = new FileOutputStream(pdfFile);
+        out = new BufferedOutputStream(out);
+
+        try {
+            Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, foUserAgent, out);
+            TransformerFactory factory = TransformerFactory.newInstance();
+            Transformer transformer = factory.newTransformer(new StreamSource(xsltFile));
+
+            Source src = new StreamSource(xmlFile);
+            Result res = new SAXResult(fop.getDefaultHandler());
+
+            transformer.transform(src, res);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            out.close();
+        }
+    }
 }
