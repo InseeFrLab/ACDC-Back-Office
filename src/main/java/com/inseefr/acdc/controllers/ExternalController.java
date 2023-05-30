@@ -1,5 +1,6 @@
 package com.inseefr.acdc.controllers;
 
+import com.inseefr.acdc.model.PdfRequestBody;
 import com.inseefr.acdc.services.ExternalService;
 import com.inseefr.acdc.services.PdfService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -76,10 +77,9 @@ public class ExternalController {
     }
 
     @Operation(summary="Generate a pdf file from xml and xsl file")
-    @PostMapping(value="mail/generate", produces = MediaType.APPLICATION_PDF_VALUE,  consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<InputStreamResource> getGeneratedPdfFromXmlAndXslt(@RequestBody String xmlContent,
-                                                                             @RequestBody String xsltContent) throws IOException {
-        pdfService.generatePdfFromXmlXslt(xmlContent, xsltContent);
+    @PostMapping(value="mail/generate", produces = MediaType.APPLICATION_PDF_VALUE,  consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<InputStreamResource> getGeneratedPdfFromXmlAndXslt(@RequestBody PdfRequestBody pdfRequestBody) throws IOException {
+        pdfService.generatePdfFromXmlXslt(pdfRequestBody.getXmlContent(), pdfRequestBody.getXsltContent());
         File pdfFile = new File("static/generatedPdf.pdf");
         InputStreamResource resource = new InputStreamResource(new FileInputStream(pdfFile));
 
