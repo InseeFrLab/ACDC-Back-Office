@@ -76,7 +76,7 @@ public class ExternalController {
     }
 
     @Operation(summary="Generate a pdf file from xml and xsl file")
-    @GetMapping(value="mail/generate", produces = MediaType.APPLICATION_PDF_VALUE)
+    @PostMapping(value="mail/generate", produces = MediaType.APPLICATION_PDF_VALUE,  consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<InputStreamResource> getGeneratedPdfFromXmlAndXslt(@RequestBody String xmlContent,
                                                                              @RequestBody String xsltContent) throws IOException {
         pdfService.generatePdfFromXmlXslt(xmlContent, xsltContent);
@@ -93,7 +93,7 @@ public class ExternalController {
     }
 
     @Operation(summary="Generate a pdf file from xsl (.fo) file")
-    @GetMapping(value="mail/generate/fo", produces = MediaType.APPLICATION_PDF_VALUE)
+    @PostMapping(value="mail/generate/fo", produces = MediaType.APPLICATION_PDF_VALUE, consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<InputStreamResource> getGeneratedPdfFromXsl(@RequestBody String xslContent) throws IOException {
         pdfService.generatePdfFromXsl(xslContent);
         File pdfFile = new File("static/generatedPdf.pdf");
