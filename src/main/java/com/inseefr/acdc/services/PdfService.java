@@ -2,16 +2,10 @@ package com.inseefr.acdc.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.apache.fop.apps.FOUserAgent;
-import org.apache.fop.apps.Fop;
-import org.apache.fop.apps.FopFactory;
-import org.apache.fop.apps.MimeConstants;
+import org.apache.fop.apps.*;
 import org.springframework.stereotype.Service;
 
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
@@ -86,6 +80,8 @@ public class PdfService {
                 transformer.transform(src, res);
             } catch (Exception e) {
                 e.printStackTrace();
+            } catch (TransformerFactoryConfigurationError e) {
+                throw new RuntimeException(e);
             } finally {
                 out.close();
             }
