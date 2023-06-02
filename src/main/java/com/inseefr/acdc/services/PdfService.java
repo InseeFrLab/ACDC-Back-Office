@@ -115,7 +115,7 @@ public class PdfService {
 
                 Transformer transformer = factory.newTransformer(new StreamSource(xslFile));
                 //Test
-                String imageFilePath = "static/coleman/Enq_ImageLogos.jpg";
+                String imageFilePath = "static/Enq_ImageLogos.jpg";
                 transformer.setParameter("imageFilePath", new File(imageFilePath).toURI().toString());
 
 
