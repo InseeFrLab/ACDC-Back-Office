@@ -112,7 +112,11 @@ public class PdfService {
             try {
                 Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, foUserAgent, out);
                 TransformerFactory factory = TransformerFactory.newInstance();
+
                 Transformer transformer = factory.newTransformer(new StreamSource(xslFile));
+                //Test
+                String imageFilePath = "static/coleman/Enq_ImageLogos.jpg";
+                transformer.setParameter("imageFilePath", imageFilePath);
 
                 Source src = new StreamSource();
                 Result res = new SAXResult(fop.getDefaultHandler());
