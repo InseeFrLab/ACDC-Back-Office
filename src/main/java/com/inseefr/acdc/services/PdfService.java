@@ -3,6 +3,8 @@ package com.inseefr.acdc.services;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.fop.apps.*;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
 import org.springframework.stereotype.Service;
 
 import javax.xml.transform.*;
@@ -93,6 +95,52 @@ public class PdfService {
 
     public void generatePdfFromXsl(String xslContent) throws IOException {
         log.info("Generate pdf from xsl using Apache Fop");
+        File xslFile = File.createTempFile("temp", ".xsl");
+        File pdfDir = new File("static");
+        pdfDir.mkdirs();
+        File pdfFile = new File(pdfDir, "generatedPdf.pdf");
+
+        try {
+            FileWriter fileWriter = new FileWriter(xslFile);
+            fileWriter.write(xslContent);
+            fileWriter.close();
+
+            FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
+            FOUserAgent foUserAgent = fopFactory.newFOUserAgent();
+
+            OutputStream out = new FileOutputStream(pdfFile);
+            out = new BufferedOutputStream(out);
+
+            try {
+                Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, foUserAgent, out);
+                TransformerFactory factory = TransformerFactory.newInstance();
+
+                Transformer transformer = factory.newTransformer(new StreamSource(xslFile));
+                //Test
+                String imageFilePath = "static/Enq_ImageLogos.jpg";
+                transformer.setParameter("imageFilePath", new File(imageFilePath).toURI().toString());
+
+
+                Source src = new StreamSource();
+                Result res = new SAXResult(fop.getDefaultHandler());
+
+                transformer.transform(src, res);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                out.close();
+            }
+        } finally {
+            FileUtils.deleteQuietly(xslFile);
+        }
+    }
+
+    public void generatePdfFromXslWithVelocity(String xslContent) throws IOException {
+        log.info("Generate pdf from xsl using Apache Fop and Velocity");
+
+        Velocity.init();
+        VelocityContext context = new VelocityContext();
+
         File xslFile = File.createTempFile("temp", ".xsl");
         File pdfDir = new File("static");
         pdfDir.mkdirs();
