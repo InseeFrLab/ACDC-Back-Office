@@ -142,6 +142,8 @@ public class PdfService {
         VelocityContext context = new VelocityContext();
 
         context.put("Ue_CiviliteEnqueteur", "Monsieur");
+        context.put("imageFilePath", "static/coleman/Enq_ImageLogos.jpg");
+
 
         StringWriter writer = new StringWriter();
         Velocity.evaluate(context, writer, "VelocityTemplate", xslContent);
