@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.fop.apps.*;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.apache.velocity.app.VelocityEngine;
 import org.springframework.stereotype.Service;
 
 import javax.xml.transform.*;
@@ -137,6 +138,8 @@ public class PdfService {
 
     public void generatePdfFromXslWithVelocity(String xslContent) throws IOException {
         log.info("Generate pdf from xsl using Apache Fop and Velocity");
+        VelocityEngine velocityEngine = new VelocityEngine();
+        velocityEngine.init();
 
         Velocity.init();
         VelocityContext context = new VelocityContext();
@@ -146,7 +149,7 @@ public class PdfService {
 
 
         StringWriter writer = new StringWriter();
-        Velocity.evaluate(context, writer, "VelocityTemplate", xslContent);
+        velocityEngine.evaluate(context, writer, "VelocityTemplate", xslContent);
 
         String modifiedXslContent = writer.toString();
         modifiedXslContent = modifiedXslContent.replace("${imageFilePath}", "'${imageFilePath}'");
