@@ -147,6 +147,8 @@ public class PdfService {
         Velocity.evaluate(context, writer, "VelocityTemplate", xslContent);
 
         String modifiedXslContent = writer.toString();
+        modifiedXslContent = modifiedXslContent.replace("${imageFilePath}", "'${imageFilePath}'");
+
 
         File xslFile = File.createTempFile("temp", ".xsl");
         File pdfDir = new File("static");
