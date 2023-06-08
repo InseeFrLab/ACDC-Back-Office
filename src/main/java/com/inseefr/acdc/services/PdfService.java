@@ -141,6 +141,13 @@ public class PdfService {
         Velocity.init();
         VelocityContext context = new VelocityContext();
 
+        context.put("Ue_CiviliteEnqueteur", "Monsieur");
+
+        StringWriter writer = new StringWriter();
+        Velocity.evaluate(context, writer, "VelocityTemplate", xslContent);
+
+        String modifiedXslContent = writer.toString();
+
         File xslFile = File.createTempFile("temp", ".xsl");
         File pdfDir = new File("static");
         pdfDir.mkdirs();
@@ -148,7 +155,7 @@ public class PdfService {
 
         try {
             FileWriter fileWriter = new FileWriter(xslFile);
-            fileWriter.write(xslContent);
+            fileWriter.write(modifiedXslContent);
             fileWriter.close();
 
             FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
