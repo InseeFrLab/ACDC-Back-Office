@@ -145,6 +145,7 @@ public class PdfService {
         VelocityContext context = new VelocityContext();
 
         context.put("Ue_CiviliteEnqueteur", "Monsieur");
+        context.put("Enq_CaractereObligatoire", "oui");
         context.put("imageFilePath", "static/coleman/Enq_ImageLogos.jpg");
 
 
