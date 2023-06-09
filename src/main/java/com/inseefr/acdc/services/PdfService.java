@@ -147,7 +147,18 @@ public class PdfService {
         context.put("Ue_CiviliteEnqueteur", "Monsieur");
         context.put("Enq_CaractereObligatoire", "oui");
         context.put("imageFilePath", "static/coleman/Enq_ImageLogos.jpg");
-
+        context.put("BddAdressePosteeL1", "M. Claude DUPONT");
+        context.put("BddAdressePosteeL2", "APT 15");
+        context.put("BddAdressePosteeL4", "17 RUE DES LILAS");
+        context.put("BddAdressePosteeL6", "75000 PARIS");
+        context.put("BddAdressePosteeL7", "FRANCE");
+        context.put("Ue_QuiRepond1", "Toutes les personnes vivant plus de la moitié de l’année avec vous. Les personnes vivant la moitié de l’année avec vous répondent uniquement si elles ont dormi à votre domicile la veille du jour où vous répondez à l’enquête.");
+        context.put("Ue_QuiRepond2","Si vous vivez dans une gendarmerie, un foyer ou un autre type de collectivité, vous seul(e) devez répondre.");
+        context.put("Ue_QuiRepond3","Une personne du foyer peut répondre pour les autres.");
+        context.put("Ue_QuiRepond","Toutes les personnes vivant avec vous doivent également répondre.");
+        context.put("Ue_AvisDebutParagraphe1","vous avez été sollicité");
+        context.put("Ue_CalcIdentifiant","PFAH9N5");
+        context.put("Ue_CalcMotDePasse","<![CDATA[3997a!22]]>");
 
         StringWriter writer = new StringWriter();
         velocityEngine.evaluate(context, writer, "VelocityTemplate", xslContent);
