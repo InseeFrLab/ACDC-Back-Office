@@ -159,6 +159,9 @@ public class PdfService {
         context.put("Ue_AvisDebutParagraphe1","vous avez été sollicité");
         context.put("Ue_CalcIdentifiant","PFAH9N5");
         context.put("Ue_CalcMotDePasse","<![CDATA[3997a!22]]>");
+        context.put("Ue_PrenomEnqueteur", "Geralt");
+        context.put("Ue_NomEnqueteur", "de Riv");
+        context.put("Ue_TelephoneEnqueteur", "01 02 03 04 05");
 
         StringWriter writer = new StringWriter();
         velocityEngine.evaluate(context, writer, "VelocityTemplate", xslContent);
