@@ -108,5 +108,12 @@ public class ExternalController {
                 .body(resource);
     }
 
+    @Operation(summary="Get quality report from Metadonee public API")
+    @GetMapping(value="quality/{id}", produces = "application/json")
+    public ResponseEntity<String> getQualityReport(@PathVariable String id) {
+        log.info("Get quality report from Metadonee public API");
+        return ResponseEntity.ok(externalService.getQualityReportById(id));
+    }
+
 }
 

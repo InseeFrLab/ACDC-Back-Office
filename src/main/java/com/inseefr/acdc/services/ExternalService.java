@@ -34,6 +34,13 @@ public class ExternalService {
     @Value("${fr.insee.magma.uri}")
     private String magmaUri;
 
+    @Value("${fr.insee.metadonnee.uri}")
+    private String metadonneeUri;
+
+    //TEMP
+    @Value("${fr.insee.metadonnee.token}")
+    private String metadonneeToken;
+
     @Autowired
     private DDIService ddiService;
 
@@ -163,4 +170,27 @@ public class ExternalService {
             e.printStackTrace();
             throw new RuntimeException(e);
         }}
+
+    public String getQualityReportById(String id) {
+        HttpClient client = HttpClient.newHttpClient();
+        String url = metadonneeUri + "operations/rapportQualite/" + id;
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Authorization", "Bearer " + metadonneeToken)
+                .build();
+
+        HttpResponse<String> response = null;
+        try {
+            response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+
+        }
+        return response.body();
+
+    }
 }
