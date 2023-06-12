@@ -48,7 +48,6 @@ public class ExternalService {
     private DataCollectionService dataCollectionService;
 
     public String getQuestionnaires(){
-        log.info("Get questionnaires from Pogues");
         HttpClient client = HttpClient.newHttpClient();
         String url = poguesUri + "api/persistence/questionnaires";
         HttpRequest request = HttpRequest.newBuilder()
@@ -69,7 +68,6 @@ public class ExternalService {
     }
 
     public String getSeries(){
-        log.info("Get series from Magma");
         HttpClient client = HttpClient.newHttpClient();
         String url = magmaUri + "operations/series?survey=true";
         HttpRequest request = HttpRequest.newBuilder()
@@ -90,7 +88,6 @@ public class ExternalService {
     }
 
     public String getSeriesOperationById(String id){
-        log.info("Get series operation by id from Magma");
         HttpClient client = HttpClient.newHttpClient();
         String url = magmaUri + "operations/serie/" + id+"/operations";
         HttpRequest request = HttpRequest.newBuilder()

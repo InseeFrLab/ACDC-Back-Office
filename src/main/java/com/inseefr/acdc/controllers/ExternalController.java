@@ -58,24 +58,6 @@ public class ExternalController {
         return ResponseEntity.ok(externalService.convertAndSendToColectica(id));
     }
 
-    @Operation(summary="Generate an empty pdf file")
-    @GetMapping(value="mail/new", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> getGeneratedPdf(
-
-    ) throws IOException {
-        pdfService.generateEmptyPdf();
-        File pdfFile = new File("static/emptyPdf.pdf");
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(pdfFile));
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=generatedPdf.pdf");
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(resource);
-    }
-
     @Operation(summary="Generate a pdf file from xml and xsl file")
     @PostMapping(value="mail/generate", produces = MediaType.APPLICATION_PDF_VALUE,  consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<InputStreamResource> getGeneratedPdfFromXmlAndXslt(@RequestBody PdfRequestBody pdfRequestBody) throws IOException {
