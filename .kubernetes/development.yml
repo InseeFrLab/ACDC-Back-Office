@@ -41,8 +41,8 @@ spec:
                 configMapKeyRef:
                   name: acdc-config-map
                   key: FR_INSEE_METADONNEE_URI
-            - name: FR_INSEE_METADONNE_TOKEN
+            - name: FR_INSEE_METADONNEE_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: my-secret
-                  key: FR_INSEE_METADONNE_TOKEN
+                  name: acdc-secret
+                  key: FR_INSEE_METADONNEE_TOKEN
