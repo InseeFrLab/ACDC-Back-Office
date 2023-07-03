@@ -20,7 +20,7 @@ public class SwaggerConfiguration {
                 .components(new Components())
                 .info(new Info()
                         .title(buildProperties.getName())
-                        .description("POC ACDC - Sorry I feel bad deleting the relational database object structure")
+                        .description("POC ACDC ")
                         .version(buildProperties.getVersion()));
     }
 

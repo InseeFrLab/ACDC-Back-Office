@@ -118,7 +118,7 @@ public class PdfService {
 
                 Transformer transformer = factory.newTransformer(new StreamSource(xslFile));
                 //Test
-                String imageFilePath = "static/Enq_ImageLogos.jpg";
+                String imageFilePath = "https://blog.logomyway.com/wp-content/uploads/2021/08/ACDC-Logo-red.jpg";
                 transformer.setParameter("imageFilePath", new File(imageFilePath).toURI().toString());
 
 
