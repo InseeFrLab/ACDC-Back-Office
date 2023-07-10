@@ -162,6 +162,8 @@ public class PdfService {
         context.put("Ue_PrenomEnqueteur", "Geralt");
         context.put("Ue_NomEnqueteur", "de Riv");
         context.put("Ue_TelephoneEnqueteur", "01 02 03 04 05");
+        context.put("Modif_Enq_PartieDeroulementEnquete", "oui");
+        context.put("Modif_Enq_Prestataire", "oui");
 
         StringWriter writer = new StringWriter();
         velocityEngine.evaluate(context, writer, "VelocityTemplate", xslContent);
