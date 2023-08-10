@@ -1,11 +1,15 @@
 package com.inseefr.acdc.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.inseefr.acdc.model.MailVariable;
 import com.inseefr.acdc.model.PdfRequestBody;
 import com.inseefr.acdc.services.ExternalService;
 import com.inseefr.acdc.services.PdfService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -58,26 +62,13 @@ public class ExternalController {
         return ResponseEntity.ok(externalService.convertAndSendToColectica(id));
     }
 
-    @Operation(summary="Generate a pdf file from xml and xsl file")
-    @PostMapping(value="mail/generate", produces = MediaType.APPLICATION_PDF_VALUE,  consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<InputStreamResource> getGeneratedPdfFromXmlAndXslt(@RequestBody PdfRequestBody pdfRequestBody) throws IOException {
-        pdfService.generatePdfFromXmlXslt(pdfRequestBody.getXmlContent(), pdfRequestBody.getXsltContent());
-        File pdfFile = new File("static/generatedPdf.pdf");
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(pdfFile));
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=generatedPdf.pdf");
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(resource);
-    }
 
     @Operation(summary="Generate a pdf file from xsl (.fo) file")
-    @PostMapping(value="mail/generate/fo", produces = MediaType.APPLICATION_PDF_VALUE, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<InputStreamResource> getGeneratedPdfFromXsl(@RequestBody String xslContent) throws IOException {
-        pdfService.generatePdfFromXslWithVelocity(xslContent);
+    @PostMapping(value="mail/generate/fo", produces = MediaType.APPLICATION_PDF_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<InputStreamResource> getGeneratedPdfFromXsl(@RequestBody JSONArray jsonArray) throws IOException {
+        log.info("Generate pdf file from xsl file and mail variables ");
+        pdfService.generatePdfFromXslWithVelocity(jsonArray);
         File pdfFile = new File("static/generatedPdf.pdf");
         InputStreamResource resource = new InputStreamResource(new FileInputStream(pdfFile));
 

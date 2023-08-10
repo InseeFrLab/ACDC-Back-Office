@@ -11,5 +11,13 @@ import lombok.Setter;
 @Setter
 public class PdfRequestBody {
     private String xmlContent;
-    private String xsltContent;
+    private MailVariable mailVariable;
+
+    @Override
+    public String toString() {
+        return "PdfRequestBody{" +
+                "xmlContent='" + xmlContent + '\'' +
+                ", mailVariable=" + mailVariable.toString() +
+                '}';
+    }
 }

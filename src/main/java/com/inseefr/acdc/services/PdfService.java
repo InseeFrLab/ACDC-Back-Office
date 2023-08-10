@@ -1,11 +1,16 @@
 package com.inseefr.acdc.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.inseefr.acdc.model.MailVariable;
+import com.inseefr.acdc.model.PdfRequestBody;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.fop.apps.*;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.app.VelocityEngine;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import javax.xml.transform.*;
@@ -136,7 +141,14 @@ public class PdfService {
         }
     }
 
-    public void generatePdfFromXslWithVelocity(String xslContent) throws IOException {
+    public void generatePdfFromXslWithVelocity(JSONArray jsonArray) throws IOException {
+
+        JSONObject jsonObject = jsonArray.getJSONObject(0);
+        ObjectMapper objectMapper = new ObjectMapper();
+        MailVariable mailVariable = objectMapper.readValue(jsonObject.getString("mailVariable"), MailVariable.class);
+        String xslContent = jsonObject.getString("xslContent");
+
+        // TODO : Refactor this
         log.info("Generate pdf from xsl using Apache Fop and Velocity");
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.init();
@@ -164,6 +176,14 @@ public class PdfService {
         context.put("Ue_TelephoneEnqueteur", "01 02 03 04 05");
         context.put("Modif_Enq_PartieDeroulementEnquete", "oui");
         context.put("Modif_Enq_Prestataire", "oui");
+
+        context.put("Enq_AnneeVisa", mailVariable.getEnq_AnneeVisa());
+        context.put("Enq_MinistereTutelle", mailVariable.getEnq_MinistereTutelle());
+        context.put("Enq_ParutionJo", mailVariable.isEnq_ParutionJo());
+        context.put("Enq_DateParutionJo", mailVariable.getEnq_DateParutionJo());
+        context.put("Enq_ServiceCollecteurSignataireNom", mailVariable.getEnq_ServiceCollecteurSignataireNom());
+        context.put("Enq_ServiceCollecteurSignataireFonction", mailVariable.getEnq_ServiceCollecteurSignataireFonction());
+        context.put("Enq_MailRespOperationnel", mailVariable.getEnq_MailRespOperationnel());
 
         StringWriter writer = new StringWriter();
         velocityEngine.evaluate(context, writer, "VelocityTemplate", xslContent);
