@@ -142,12 +142,10 @@ public class PdfService {
     }
 
     public void generatePdfFromXslWithVelocity(String jsonArray) throws IOException {
-        log.info("ici");
-        log.info("jsonArray : " + jsonArray);
         JSONObject jsonObject = new JSONObject(jsonArray);
         ObjectMapper objectMapper = new ObjectMapper();
-        MailVariable mailVariable = objectMapper.readValue(jsonObject.getString("mailVariable"), MailVariable.class);
-        String xslContent = jsonObject.getString("xslContent");
+        MailVariable mailVariable = objectMapper.readValue(jsonObject.get("mailVariable").toString(), MailVariable.class);
+        String xslContent = jsonObject.getString("xml");
 
         // TODO : Refactor this
         log.info("Generate pdf from xsl using Apache Fop and Velocity");
