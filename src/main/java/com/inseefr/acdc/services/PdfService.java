@@ -143,7 +143,7 @@ public class PdfService {
 
     public void generatePdfFromXslWithVelocity(String jsonArray) throws IOException {
         log.info("ici");
-        JSONObject jsonObject = new JSONObject(new JSONArray(jsonArray).get(0).toString());
+        JSONObject jsonObject = new JSONObject(jsonArray);
         ObjectMapper objectMapper = new ObjectMapper();
         MailVariable mailVariable = objectMapper.readValue(jsonObject.getString("mailVariable"), MailVariable.class);
         String xslContent = jsonObject.getString("xslContent");
