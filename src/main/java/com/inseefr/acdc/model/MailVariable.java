@@ -19,7 +19,7 @@ public class MailVariable {
     private String Enq_MinistereTutelle;
 
     @JsonProperty("Enq_ParutionJo")
-    private boolean Enq_ParutionJo;
+    private String Enq_ParutionJo;
 
     @JsonProperty("Enq_DateParutionJo")
     private String Enq_DateParutionJo;

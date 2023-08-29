@@ -178,7 +178,7 @@ public class PdfService {
 
         context.put("Enq_AnneeVisa", mailVariable.getEnq_AnneeVisa());
         context.put("Enq_MinistereTutelle", mailVariable.getEnq_MinistereTutelle());
-        context.put("Enq_ParutionJo", mailVariable.isEnq_ParutionJo());
+        context.put("Enq_ParutionJo", mailVariable.getEnq_ParutionJo());
         context.put("Enq_DateParutionJo", mailVariable.getEnq_DateParutionJo());
         context.put("Enq_ServiceCollecteurSignataireNom", mailVariable.getEnq_ServiceCollecteurSignataireNom());
         context.put("Enq_ServiceCollecteurSignataireFonction", mailVariable.getEnq_ServiceCollecteurSignataireFonction());
