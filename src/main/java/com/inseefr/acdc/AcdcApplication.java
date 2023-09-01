@@ -6,7 +6,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableLoadTimeWeaving;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.inseefr.acdc"})
 public class AcdcApplication {
 
 	public static void main(String[] args) {
