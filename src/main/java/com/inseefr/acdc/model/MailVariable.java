@@ -36,6 +36,9 @@ public class MailVariable {
     @JsonProperty("Enq_LibelleEnquete")
     private String Enq_LibelleEnquete;
 
+    @JsonProperty("Enq_CaractereObligatoire")
+    private String Enq_CaractereObligatoire;
+
     @Override
     public String toString() {
         return "MailVariable{" +
