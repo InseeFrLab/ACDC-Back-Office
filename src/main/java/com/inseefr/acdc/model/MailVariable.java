@@ -33,6 +33,9 @@ public class MailVariable {
     @JsonProperty("Enq_MailRespOperationnel")
     private String Enq_MailRespOperationnel;
 
+    @JsonProperty("Enq_LibelleEnquete")
+    private String Enq_LibelleEnquete;
+
     @Override
     public String toString() {
         return "MailVariable{" +
@@ -43,6 +46,7 @@ public class MailVariable {
                 ", Enq_ServiceCollecteurSignataireNom='" + Enq_ServiceCollecteurSignataireNom + '\'' +
                 ", Enq_ServiceCollecteurSignataireFonction='" + Enq_ServiceCollecteurSignataireFonction + '\'' +
                 ", Enq_MailRespOperationnel='" + Enq_MailRespOperationnel + '\'' +
+                ", Enq_LibelleEnquete='" + Enq_LibelleEnquete + '\'' +
                 '}';
     }
 }

@@ -183,6 +183,7 @@ public class PdfService {
         context.put("Enq_ServiceCollecteurSignataireNom", mailVariable.getEnq_ServiceCollecteurSignataireNom());
         context.put("Enq_ServiceCollecteurSignataireFonction", mailVariable.getEnq_ServiceCollecteurSignataireFonction());
         context.put("Enq_MailRespOperationnel", mailVariable.getEnq_MailRespOperationnel());
+        context.put("Enq_LibelleEnquete", mailVariable.getEnq_LibelleEnquete());
 
         StringWriter writer = new StringWriter();
         velocityEngine.evaluate(context, writer, "VelocityTemplate", xslContent);
